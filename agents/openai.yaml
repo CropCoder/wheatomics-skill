@@ -1,0 +1,5 @@
+interface:
+  display_name: "WheatOmics"
+  short_description: "Query wheat multi-omics data: genes, expression, networks, sequences, homologs & more"
+  brand_color: "#16A34A"
+  default_prompt: "Use $wheatomics to query the WheatOmics wheat multi-omics database for gene details, expression profiles, coexpression networks, homologs, or sequences."
