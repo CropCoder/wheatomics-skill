@@ -16,12 +16,13 @@ A skill for the [Codex CLI](https://github.com/openai/codex) that provides acces
 
 ## Installation
 
+### From GitHub
+
 ```bash
-# Install via Codex skill-installer
-codex skill install wheatomics
+$skill-installer install https://github.com/CropCoder/wheatomics-skill
 ```
 
-Or manually copy the `wheatomics/` directory to `$CODEX_HOME/skills/`.
+Or clone the repository and copy files to `$CODEX_HOME/skills/wheatomics/`.
 
 ## Usage
 
