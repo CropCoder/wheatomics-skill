@@ -6,17 +6,29 @@ Usage:
   python3 wheatomics.py --list
 
 Examples:
-  # Gene detail
-  python3 wheatomics.py genes/detail/TraesCS5A02G391700
+  # 取基因组区间序列（新端点，推荐）
+  python3 wheatomics.py sequence/retrieve database=all_genomes id=chr7A_Chinese_Spring1.0:671483942-671485941
 
   # Coexpression query with params
-  python3 wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=wheat_expv1 filter_value=0.8
+  python3 wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=CO_PRJEB25639 filter_value=0.8
 
   # Expression query
   python3 wheatomics.py expression/query gene_ids=TraesCS5A02G391700 project=wheat_expression_public_TPM_v1
 
+  # 按基因 ID 取序列
+  python3 wheatomics.py sequence/retrieve database=all_gene id=TraesCS7A03G1158600
+
+  # 按蛋白 ID 取序列
+  python3 wheatomics.py sequence/retrieve database=all_protein id=TraesCS7A03G1158600.1
+
+  # 共表达网络图
+  python3 wheatomics.py coexpression/network gene_ids=TraesCS5A02G391700 database=CO_PRJEB25639 pcc_threshold=0.7
+
   # POST with JSON body
   python3 wheatomics.py tasks/primer-design --data @payload.json
+
+  # 基因详情
+  python3 wheatomics.py genes/detail/TraesCS5A02G391700
 
   # List all available endpoints
   python3 wheatomics.py --list
@@ -51,15 +63,16 @@ ENDPOINTS = {
     ],
     "Networks": [
         ("GET", "coexpression/databases", "List coexpression databases"),
-        ("GET", "coexpression/query", "Query coexpression pairs"),
-        ("GET", "coexpression/network", "Build coexpression network graph"),
+        ("GET", "coexpression/query", "Query coexpression pairs (PCC threshold or Mutual Rank)"),
+        ("GET", "coexpression/network", "Build coexpression network graph (nodes + edges)"),
         ("GET", "ppi/query", "Query PPI interactions"),
     ],
     "Sequences": [
         ("GET", "sequence/by-gene", "Get CDS+protein FASTA by gene"),
+        ("GET", "sequence/retrieve", "取序列（推荐）- 同 getsequence 前端，支持基因组/基因/蛋白"),
         ("GET", "sequence/batch", "Batch FASTA (space-separated IDs)"),
-        ("GET", "sequence/by-interval", "Genomic DNA by interval (max 5Mb)"),
         ("GET", "preblast", "Precomputed BLAST results"),
+        ("GET", "sequence/by-interval", "基因组区间序列（已修复，推荐改用 sequence/retrieve）"),
         ("GET", "novabrowse", "Novabrowse genome browser"),
     ],
     "Comparative": [

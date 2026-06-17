@@ -96,7 +96,7 @@ For large response payloads (e.g., expression matrices, coexpression networks), 
 python3 scripts/wheatomics.py genes/detail/TraesCS5A02G391700
 
 # With query params
-python3 scripts/wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=wheat_expv1 filter_value=0.8
+python3 scripts/wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=CO_PRJEB25639 filter_value=0.8
 
 # POST request with JSON body file
 python3 scripts/wheatomics.py tasks/primer-design --data @payload.json

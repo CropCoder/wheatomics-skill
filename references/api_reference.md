@@ -420,7 +420,7 @@ curl -X GET "http://localhost:8000/api/sequence/by-gene?gene_id=TraesCS5A02G3917
 
 **Example:**
 ```bash
-curl -X GET "http://localhost:8000/api/sequence/by-interval?region=chr5A:587123000-587124000&database=Chinese_Spring_genome"
+curl -X GET "http://localhost:8000/api/sequence/by-interval?region=chr5A:587123000-587124000&database=Chinese_Spring1.0.genome"
 ```
 
 ---
