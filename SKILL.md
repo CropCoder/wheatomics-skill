@@ -23,7 +23,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 
 ### Genes
 - `GET /api/genes/detail/{gene_id}` — Gene detail: description, chromosome, protein length, MW, pI, annotations, JBrowse/Ensembl links. Supports IWGSC v1/v2/v3.
-- `GET /api/genes/functions/search?ID=` — Search gene function annotations. Modes: genomic interval (`chr5A:100000-200000`), gene ID, or PFAM domain (`PF` prefix).
+- `GET /api/genes/functions/search?ID=&table=` — Search gene function annotations. Modes: genomic interval (`chr5A:100000-200000`), gene ID, or PFAM domain (`PF` prefix). Default table: `Genefunc_table`. Other tables: `GO`, `GO_2017`, `KEGG`, `Pfam`, `InterPro`.
 - `GET /api/genes/known/search?gene_id=` — Search known/characterized genes with phenotypes and references.
 - `GET /api/genes/known/{gene_id}` — Get a specific known gene by clone ID or gene ID.
 - `POST /api/genes/known` — Submit a new known gene entry.
@@ -45,6 +45,21 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/sequence/by-interval?region=&database=` — Extract genomic DNA from a chromosome interval (max 5 Mb). Region format: `chr1A:100000-200000`.
 - `GET /api/preblast?ID=&blastp_species=` — Get precomputed BLAST results for a gene against a species.
 - `GET /api/novabrowse?id=` — Run Novabrowse for genome browser visualization.
+
+### BLAST (在线比对)
+- `GET /api/api/blast/databases?program=` — List available BLAST databases. `program`: `blastp` / `blastn` / 留空=全部。
+- `GET /api/api/blast/status` — Check BLAST environment (blastp/blastn/blastdbcmd versions).
+- `POST /api/api/blast/search` — Submit a BLAST search. Request body (form-urlencoded):
+
+  | 参数 | 类型 | 必填 | 默认 | 说明 |
+  |------|------|------|------|------|
+  | `program` | string | 否 | `blastp` | `blastp`（蛋白）或 `blastn`（核酸） |
+  | `database` | string | **是** | — | 数据库名，多个用逗号分隔 |
+  | `query` | string | **是** | — | FASTA 格式的查询序列 |
+  | `evalue` | number | 否 | `10.0` | E-value 阈值 |
+  | `max_target_seqs` | integer | 否 | `20` | 最多返回的匹配数 |
+  | `outfmt` | string | 否 | `json` | `json`（结构化）或 `tabular`（文本表格） |
+  | `save_html` | boolean | 否 | `false` | 设为 `true` 生成可访问的 HTML 结果页面 |
 
 ### Comparative Genomics
 - `GET /api/homologs/triticeae?gene_id=&type=` — Find homologs across Triticeae species (Chinese Spring, durum, wild emmer, etc.).
@@ -97,6 +112,15 @@ python3 scripts/wheatomics.py genes/detail/TraesCS5A02G391700
 
 # With query params
 python3 scripts/wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=CO_PRJEB25639 filter_value=0.8
+
+# BLAST: 查看可用数据库
+python3 scripts/wheatomics.py api/blast/databases
+
+# BLAST: 蛋白比对
+python3 scripts/wheatomics.py api/blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
+
+# BLAST: 查看服务器状态
+python3 scripts/wheatomics.py api/blast/status
 
 # POST request with JSON body file
 python3 scripts/wheatomics.py tasks/primer-design --data @payload.json

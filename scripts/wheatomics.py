@@ -27,8 +27,16 @@ Examples:
   # POST with JSON body
   python3 wheatomics.py tasks/primer-design --data @payload.json
 
+  # BLAST: 查看可用数据库
+  python3 wheatomics.py api/blast/databases
+
+  # BLAST: 蛋白比对
+  python3 wheatomics.py api/blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
+
+  # BLAST: 查看服务器状态
+  python3 wheatomics.py api/blast/status
+
   # 基因详情
-  python3 wheatomics.py genes/detail/TraesCS5A02G391700
 
   # List all available endpoints
   python3 wheatomics.py --list
@@ -80,6 +88,11 @@ ENDPOINTS = {
         ("GET", "homologs/wheat-rice-arabidopsis", "Wheat-rice-Arabidopsis orthologs"),
         ("GET", "id-conversion", "Convert gene ID versions"),
         ("GET", "synteny/search", "Search syntenic blocks"),
+    ],
+        "BLAST": [
+        ("GET", "api/blast/databases", "List available BLAST databases"),
+        ("GET", "api/blast/status", "Check BLAST environment status"),
+        ("POST", "api/blast/search", "Submit BLAST search (blastp/blastn)"),
     ],
     "Literature": [
         ("GET", "literature/search", "Search literature"),
@@ -140,19 +153,27 @@ def request(method, path, params=None, json_body=None):
     """Make an API request and return parsed JSON."""
     url = f"{BASE_URL}/{path.lstrip('/')}"
 
-    if params:
-        query_string = urllib.parse.urlencode(params)
-        url = f"{url}?{query_string}"
-
-    req = urllib.request.Request(url, method=method)
-    req.add_header("Accept", "application/json")
-
-    if json_body is not None:
+    if method.upper() == "POST" and params and json_body is None:
+        # Form-urlencoded POST (e.g., BLAST search)
+        data = urllib.parse.urlencode(params).encode("utf-8")
+        req = urllib.request.Request(url, data=data, method=method)
+        req.add_header("Content-Type", "application/x-www-form-urlencoded")
+    elif json_body is not None:
+        # JSON body POST (e.g., tasks/primer-design)
         data = json.dumps(json_body).encode("utf-8")
+        req = urllib.request.Request(url, data=data, method=method)
         req.add_header("Content-Type", "application/json")
-        req.add_header("Content-Length", str(len(data)))
-    else:
+    elif params:
+        # GET query params
+        query_string = urllib.parse.urlencode(params)
+        full_url = f"{url}?{query_string}"
+        req = urllib.request.Request(full_url, method=method)
         data = None
+    else:
+        req = urllib.request.Request(url, method=method)
+        data = None
+    
+    req.add_header("Accept", "application/json")
 
     try:
         with urllib.request.urlopen(req, data=data, timeout=30) as resp:
