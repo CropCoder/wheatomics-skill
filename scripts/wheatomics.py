@@ -16,7 +16,7 @@ Examples:
   python3 wheatomics.py expression/query gene_ids=TraesCS5A02G391700 project=wheat_expression_public_TPM_v1
 
   # 按基因 ID 取序列
-  python3 wheatomics.py sequence/retrieve database=all_gene id=TraesCS7A03G1158600
+  python3 wheatomics.py sequence/retrieve database=all_gene id=TraesCS7A03G1158600.1
 
   # 按蛋白 ID 取序列
   python3 wheatomics.py sequence/retrieve database=all_protein id=TraesCS7A03G1158600.1
