@@ -93,7 +93,7 @@ Use `id-conversion` to convert between versions.
 - Sequence by interval: max 5,000,000 bp range.
 - Batch sequence uses **spaces** (not commas) between gene IDs.
 - All other multi-gene endpoints use **commas**.
-- `sequence/by-gene` and `sequence/batch` auto-append `.1` suffix if absent, but `sequence/retrieve` requires explicit `.1`.
+- `sequence/by-gene` and `sequence/batch` auto-append `.1` suffix if absent.
 - Coexpression `filter_value`: decimal (e.g., 0.8) = PCC threshold | integer (e.g., 5) = mutual rank.
 - Synteny input accepts both gene IDs and genomic intervals.
 

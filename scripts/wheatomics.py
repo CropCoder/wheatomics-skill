@@ -7,7 +7,7 @@ Usage:
 
 Examples:
   # 取基因组区间序列（新端点，推荐）
-  python3 wheatomics.py sequence/retrieve database=all_genomes id=chr7A_Chinese_Spring1.0:671483942-671485941
+  python3 wheatomics.py sequence/by-interval region=chr7A_Chinese_Spring1.0:671483942-671485941 database=all_genomes
 
   # Coexpression query with params
   python3 wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=CO_PRJEB25639 filter_value=0.8
@@ -16,10 +16,10 @@ Examples:
   python3 wheatomics.py expression/query gene_ids=TraesCS5A02G391700 project=wheat_expression_public_TPM_v1
 
   # 按基因 ID 取序列
-  python3 wheatomics.py sequence/retrieve database=all_gene id=TraesCS7A03G1158600.1
+  python3 wheatomics.py sequence/by-gene gene_id=TraesCS7A03G1158600
 
   # 按蛋白 ID 取序列
-  python3 wheatomics.py sequence/retrieve database=all_protein id=TraesCS7A03G1158600.1
+  python3 wheatomics.py sequence/by-gene gene_id=TraesCS7A03G1158600 protein_db=all_protein
 
   # 共表达网络图
   python3 wheatomics.py coexpression/network gene_ids=TraesCS5A02G391700 database=CO_PRJEB25639 pcc_threshold=0.7
@@ -77,10 +77,9 @@ ENDPOINTS = {
     ],
     "Sequences": [
         ("GET", "sequence/by-gene", "Get CDS+protein FASTA by gene"),
-        ("GET", "sequence/retrieve", "取序列（推荐）- 同 getsequence 前端，支持基因组/基因/蛋白"),
         ("GET", "sequence/batch", "Batch FASTA (space-separated IDs)"),
+        ("GET", "sequence/by-interval", "基因组区间序列"),
         ("GET", "preblast", "Precomputed BLAST results"),
-        ("GET", "sequence/by-interval", "基因组区间序列（已修复，推荐改用 sequence/retrieve）"),
         ("GET", "novabrowse", "Novabrowse genome browser"),
     ],
     "Comparative": [
