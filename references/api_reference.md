@@ -415,12 +415,12 @@ curl -X GET "http://localhost:8000/api/sequence/by-gene?gene_id=TraesCS5A02G3917
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `region` | string | Yes | - | Legacy format like chr1A:10-100 |
+| `region` | string | Yes | - | Legacy region format |
 | `database` | string | Yes | - |  |
 
 **Example:**
 ```bash
-curl -X GET "http://localhost:8000/api/sequence/by-interval?region=chr5A:587123000-587124000&database=Chinese_Spring1.0.genome"
+curl -X GET "https://wheatomics.sdau.edu.cn/api/sequence/by-interval?region=chr1A_Fielder:587123000-587124000&database=all_genomes"
 ```
 
 ---
