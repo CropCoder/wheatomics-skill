@@ -42,7 +42,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 ### Sequences
 - `GET /api/sequence/by-gene?gene_id=&gene_db=&protein_db=` — Fetch CDS and protein FASTA for a gene.
 - `GET /api/sequence/batch?ID=&database=` — Batch FASTA retrieval for multiple genes (space-separated).
-- `GET /api/sequence/by-interval?region=&database=` — Extract genomic DNA from a chromosome interval (max 5 Mb). Region format: `chr1A:100000-200000`.
+- `GET /api/sequence/by-interval?region=&database=` — Extract genomic DNA from a chromosome interval (max 5 Mb). Region format: `chr{Chromosome}_{Variety}:{start}-{end}` (e.g., `chr1A_Fielder:587123000-587124000`).
 - `GET /api/preblast?ID=&blastp_species=` — Get precomputed BLAST results for a gene against a species.
 - `GET /api/novabrowse?id=` — Run Novabrowse for genome browser visualization.
 

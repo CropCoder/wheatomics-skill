@@ -7,7 +7,7 @@ Usage:
 
 Examples:
   # 取基因组区间序列（新端点，推荐）
-  python3 wheatomics.py sequence/by-interval region=chr7A_Chinese_Spring1.0:671483942-671485941 database=all_genomes
+  python3 wheatomics.py sequence/by-interval region=chr1A_Fielder:587123000-587124000 database=all_genomes
 
   # Coexpression query with params
   python3 wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=CO_PRJEB25639 filter_value=0.8
