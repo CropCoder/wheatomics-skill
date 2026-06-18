@@ -12,7 +12,7 @@ Examples:
   # Coexpression query with params
   python3 wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=CO_PRJEB25639 filter_value=0.8
 
-  # Expression query
+  # Expression query（仅支持 02G 基因 ID）
   python3 wheatomics.py expression/query gene_ids=TraesCS5A02G391700 project=wheat_expression_public_TPM_v1
 
   # 按基因 ID 取序列

@@ -31,7 +31,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 
 ### Expression
 - `GET /api/expression/projects` — List all expression projects grouped by category (Tissue, Abiotic, Biotic, Development).
-- `GET /api/expression/query?gene_ids=&project=` — Query expression values with SD error bars for genes in a project.
+- `GET /api/expression/query?gene_ids=&project=` — Query expression values with SD error bars for genes in a project. **仅支持 IWGSC v2 (02G) 基因 ID**，非 02G 基因需先用 `id-conversion` 转换。
 
 ### Networks (Coexpression & PPI)
 - `GET /api/coexpression/databases` — List available coexpression databases.
@@ -94,6 +94,7 @@ Use `id-conversion` to convert between versions.
 - Batch sequence uses **spaces** (not commas) between gene IDs.
 - All other multi-gene endpoints use **commas**.
 - `sequence/by-gene` and `sequence/batch` auto-append `.1` suffix if absent.
+- `expression/query` **仅支持 IWGSC v2 (02G)** 基因 ID。其他版本（v1/v3）的基因 ID 需先通过 `id-conversion` 转换为 v2 格式。
 - Coexpression `filter_value`: decimal (e.g., 0.8) = PCC threshold | integer (e.g., 5) = mutual rank.
 - Synteny input accepts both gene IDs and genomic intervals.
 
