@@ -28,13 +28,13 @@ Examples:
   python3 wheatomics.py tasks/primer-design --data @payload.json
 
   # BLAST: 查看可用数据库
-  python3 wheatomics.py api/blast/databases
+  python3 wheatomics.py blast/databases
 
   # BLAST: 蛋白比对
-  python3 wheatomics.py api/blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
+  python3 wheatomics.py blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
 
   # BLAST: 查看服务器状态
-  python3 wheatomics.py api/blast/status
+  python3 wheatomics.py blast/status
 
   # 基因详情
 
@@ -90,9 +90,9 @@ ENDPOINTS = {
         ("GET", "synteny/search", "Search syntenic blocks"),
     ],
         "BLAST": [
-        ("GET", "api/blast/databases", "List available BLAST databases"),
-        ("GET", "api/blast/status", "Check BLAST environment status"),
-        ("POST", "api/blast/search", "Submit BLAST search (blastp/blastn)"),
+        ("GET", "blast/databases", "List available BLAST databases"),
+        ("GET", "blast/status", "Check BLAST environment status"),
+        ("POST", "blast/search", "Submit BLAST search (blastp/blastn)"),
     ],
     "Literature": [
         ("GET", "literature/search", "Search literature"),

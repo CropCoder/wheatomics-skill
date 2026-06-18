@@ -47,13 +47,13 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/novabrowse?id=` — Run Novabrowse for genome browser visualization.
 
 ### BLAST (在线比对)
-- `GET /api/api/blast/databases?program=` — List available BLAST databases. `program`: `blastp` / `blastn` / 留空=全部。
-- `GET /api/api/blast/status` — Check BLAST environment (blastp/blastn/blastdbcmd versions).
-- `POST /api/api/blast/search` — Submit a BLAST search. Request body (form-urlencoded):
+- `GET /api/blast/databases?program=` — List available BLAST databases. `program`: `blastp` / `blastn` / 留空=全部。
+- `GET /api/blast/status` — Check BLAST environment (blastp/blastn/blastdbcmd versions).
+- `POST /api/blast/search` — Submit a BLAST search. Request body (form-urlencoded):
 
   | 参数 | 类型 | 必填 | 默认 | 说明 |
   |------|------|------|------|------|
-  | `program` | string | 否 | `blastp` | `blastp`（蛋白）或 `blastn`（核酸） |
+  | `program` | string | 否 | `blastp` | `blastp`(蛋白→蛋白) / `blastn`(核酸→核酸) / `blastx`(核酸→蛋白) / `tblastn`(蛋白→核酸) / `tblastx`(核酸翻译→蛋白翻译) |
   | `database` | string | **是** | — | 数据库名，多个用逗号分隔 |
   | `query` | string | **是** | — | FASTA 格式的查询序列 |
   | `evalue` | number | 否 | `10.0` | E-value 阈值 |
@@ -114,13 +114,13 @@ python3 scripts/wheatomics.py genes/detail/TraesCS5A02G391700
 python3 scripts/wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=CO_PRJEB25639 filter_value=0.8
 
 # BLAST: 查看可用数据库
-python3 scripts/wheatomics.py api/blast/databases
+python3 scripts/wheatomics.py blast/databases
 
 # BLAST: 蛋白比对
-python3 scripts/wheatomics.py api/blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
+python3 scripts/wheatomics.py blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
 
 # BLAST: 查看服务器状态
-python3 scripts/wheatomics.py api/blast/status
+python3 scripts/wheatomics.py blast/status
 
 # POST request with JSON body file
 python3 scripts/wheatomics.py tasks/primer-design --data @payload.json
