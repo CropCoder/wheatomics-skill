@@ -73,7 +73,7 @@ ENDPOINTS = {
         ("GET", "coexpression/databases", "List coexpression databases"),
         ("GET", "coexpression/query", "Query coexpression pairs (PCC threshold or Mutual Rank)"),
         ("GET", "coexpression/network", "Build coexpression network graph (nodes + edges)"),
-        ("GET", "ppi/query", "Query PPI interactions"),
+        ("GET", "ppi/query", "wheatPPI: query protein interactions (CF-MS score, transcript IDs need .1 suffix)"),
     ],
     "Sequences": [
         ("GET", "sequence/by-gene", "Get CDS+protein FASTA by gene"),

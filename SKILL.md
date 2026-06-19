@@ -37,7 +37,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/coexpression/databases` — List available coexpression databases.
 - `GET /api/coexpression/query?gene_ids=&database=&filter_value=` — Query coexpression pairs by PCC threshold or mutual rank.
 - `GET /api/coexpression/network?gene_ids=&database=&pcc_threshold=` — Build network graph (nodes + edges) for visualization.
-- `GET /api/ppi/query?gene_ids=&table=&min_score=` — Query protein-protein interaction pairs.
+- `GET /api/ppi/query?gene_ids=&table=&min_score=` — wheatPPI: 查询蛋白互作（CF-MS 评分）。仅支持中国春 02G 转录本 ID（需加 `.1` 后缀），不支持 eggNOG ID。评分阈值: 0.5（高置信）/ 0.2（中等）/ 0（全部）。
 
 ### Sequences
 - `GET /api/sequence/by-gene?gene_id=&gene_db=&protein_db=` — Fetch CDS and protein FASTA for a gene.

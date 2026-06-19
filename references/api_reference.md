@@ -347,7 +347,9 @@ curl -X GET "http://localhost:8000/api/novabrowse?chrom=chr5A&start=587000000&en
 
 **Example:**
 ```bash
-curl -X GET "http://localhost:8000/api/ppi/query?gene_ids=TraesCS5A02G391700&min_score=0.7"
+# 转录本 ID 需加 .1 后缀，不支持 eggNOG ID
+# CF-MS 评分阈值: 0.5（高置信）/ 0.2（中等）/ 0（全部）
+curl -X GET "https://wheatomics.sdau.edu.cn/api/ppi/query?gene_ids=TraesCS6D02G084800.1&min_score=0.5"
 ```
 
 ---
