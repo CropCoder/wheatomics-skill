@@ -152,31 +152,6 @@ curl -X GET "http://localhost:8000/api/genes/known/search?searchid=VRN1"
 
 ---
 
-### PUT /api/genes/known/{clone_id}
-
-**Tags:** Genes
-
-**Update Known Gene**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `clone_id` | integer | Yes | - |  |
-
-**Request Body (JSON):**
-```json
-// Schema: GeneUpdateRequest — see schemas section below
-{
-  "$ref": "#/components/schemas/GeneUpdateRequest"
-}
-```
-
-**Example:**
-```bash
-curl -X PUT "http://localhost:8000/api/genes/known/1" \
-```
-
----
-
 ### GET /api/genes/known/{gene_id}
 
 **Tags:** Genes
@@ -660,79 +635,6 @@ curl -X POST "http://localhost:8000/api/tasks/synteny-figure" \
 }
 ```
 
-### GeneUpdateRequest
-
-```json
-{
-  "properties": {
-    "gene_id": {
-      "type": "string",
-      "title": "Gene Id"
-    },
-    "gene_name": {
-      "type": "string",
-      "title": "Gene Name"
-    },
-    "chrom_pos": {
-      "type": "string",
-      "title": "Chrom Pos"
-    },
-    "phenotype": {
-      "type": "string",
-      "title": "Phenotype"
-    },
-    "gene_species": {
-      "type": "string",
-      "title": "Gene Species"
-    },
-    "paper_title": {
-      "type": "string",
-      "title": "Paper Title"
-    },
-    "paper_doi": {
-      "type": "string",
-      "title": "Paper Doi"
-    },
-    "key_result": {
-      "type": "string",
-      "title": "Key Result"
-    },
-    "author": {
-      "type": "string",
-      "title": "Author"
-    },
-    "author_mail": {
-      "type": "string",
-      "format": "email",
-      "title": "Author Mail"
-    },
-    "password": {
-      "type": "string",
-      "title": "Password"
-    },
-    "clone_id": {
-      "type": "integer",
-      "title": "Clone Id"
-    }
-  },
-  "type": "object",
-  "required": [
-    "gene_id",
-    "gene_name",
-    "chrom_pos",
-    "phenotype",
-    "gene_species",
-    "paper_title",
-    "paper_doi",
-    "key_result",
-    "author",
-    "author_mail",
-    "password",
-    "clone_id"
-  ],
-  "title": "GeneUpdateRequest",
-  "description": "Known gene update payload."
-}
 ```
 
 ### HTTPValidationError

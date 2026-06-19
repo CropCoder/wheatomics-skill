@@ -61,7 +61,6 @@ ENDPOINTS = {
         ("GET", "genes/known/search", "Search known genes"),
         ("GET", "genes/known/{gene_id}", "Get known gene detail"),
         ("POST", "genes/known", "Submit known gene"),
-        ("PUT", "genes/known/{clone_id}", "Update known gene"),
     ],
     "Expression": [
         ("GET", "expression/projects", "List expression projects"),
