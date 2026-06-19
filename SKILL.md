@@ -26,7 +26,6 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/genes/functions/search?ID=&table=` — Search gene function annotations. Modes: genomic interval (`chr5A:100000-200000`), gene ID, or PFAM domain (`PF` prefix). Default table: `Genefunc_table`. Other tables: `GO`, `GO_2017`, `KEGG`, `Pfam`, `InterPro`.
 - `GET /api/genes/known/search?gene_id=` — Search known/characterized genes with phenotypes and references.
 - `GET /api/genes/known/{gene_id}` — Get a specific known gene by clone ID or gene ID.
-- `POST /api/genes/known` — Submit a new known gene entry.
 
 ### Expression
 - `GET /api/expression/projects` — List all expression projects grouped by category (Tissue, Abiotic, Biotic, Development).
