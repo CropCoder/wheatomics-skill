@@ -21,8 +21,6 @@ Examples:
   # 按蛋白 ID 取序列
   python3 wheatomics.py sequence/by-gene gene_id=TraesCS7A03G1158600 protein_db=all_protein
 
-  # 共表达网络图
-  python3 wheatomics.py coexpression/network gene_ids=TraesCS5A02G391700 database=CO_PRJEB25639 pcc_threshold=0.7
 
   # POST with JSON body
   python3 wheatomics.py tasks/primer-design --data @payload.json
@@ -72,7 +70,6 @@ ENDPOINTS = {
     "Networks": [
         ("GET", "coexpression/databases", "List coexpression databases"),
         ("GET", "coexpression/query", "Query coexpression pairs (PCC threshold or Mutual Rank)"),
-        ("GET", "coexpression/network", "Build coexpression network graph (nodes + edges)"),
         ("GET", "ppi/query", "wheatPPI: query protein interactions (CF-MS score, transcript IDs need .1 suffix)"),
     ],
     "Sequences": [

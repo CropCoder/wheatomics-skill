@@ -29,25 +29,6 @@ curl -X GET "http://localhost:8000/api/coexpression/databases"
 
 ---
 
-### GET /api/coexpression/network
-
-**Tags:** Networks
-
-**Coexpression Network**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `gene_ids` | string | Yes | - |  |
-| `database` | string, default: CO_PRJEB25639 | No | CO_PRJEB25639 |  |
-| `pcc_threshold` | number, default: 0.8 | No | 0.8 |  |
-
-**Example:**
-```bash
-curl -X GET "http://localhost:8000/api/coexpression/network?gene_ids=TraesCS5A02G391700,TraesCS5A02G123456&pcc_threshold=0.9"
-```
-
----
-
 ### GET /api/coexpression/query
 
 **Tags:** Networks
