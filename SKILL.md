@@ -71,7 +71,9 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 
 ### Tasks (async POST)
 - `POST /api/tasks/primer-design` — Submit a primer design job (CAPS/KASP). See reference for request schema.
-- `POST /api/tasks/synteny-figure` — Submit a synteny figure rendering job. See reference for request schema.
+- `GET /api/tasks/primer-databases?category=` — List available primer reference databases (all/genome/gene).
+- `POST /api/tasks/primer-check` — Check primer specificity against reference genomes.
+- `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.
 
 ### Meta
 - `GET /api/about` — Get API name, version, docs URL.

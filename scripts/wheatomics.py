@@ -95,7 +95,9 @@ ENDPOINTS = {
     ],
     "Tasks": [
         ("POST", "tasks/primer-design", "Design SNP primers (CAPS/KASP)"),
-        ("POST", "tasks/synteny-figure", "Render synteny figure"),
+        ("GET", "tasks/primer-databases", "List primer reference databases"),
+        ("POST", "tasks/primer-check", "Check primer specificity"),
+        ("GET", "tasks/primer-result/{job_id}", "Get primer result"),
     ],
 }
 

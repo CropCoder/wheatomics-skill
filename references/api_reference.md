@@ -416,27 +416,6 @@ curl -X POST "http://localhost:8000/api/tasks/primer-design" \
 
 ---
 
-### POST /api/tasks/synteny-figure
-
-**Tags:** Tasks
-
-**Render Synteny Figure**
-
-**Request Body (JSON):**
-```json
-// Schema: SyntenyFigureRequest — see schemas section below
-{
-  "$ref": "#/components/schemas/SyntenyFigureRequest"
-}
-```
-
-**Example:**
-```bash
-curl -X POST "http://localhost:8000/api/tasks/synteny-figure" \
-```
-
----
-
 ## Schemas
 
 ### ExpressionGeneResult
@@ -729,93 +708,6 @@ curl -X POST "http://localhost:8000/api/tasks/synteny-figure" \
 }
 ```
 
-### SyntenyFigureRequest
-
-```json
-{
-  "properties": {
-    "style": {
-      "type": "string",
-      "title": "Style",
-      "default": "line"
-    },
-    "dpi": {
-      "type": "integer",
-      "title": "Dpi",
-      "default": 300
-    },
-    "format": {
-      "type": "string",
-      "title": "Format",
-      "default": "pdf"
-    },
-    "font": {
-      "type": "string",
-      "title": "Font",
-      "default": "Arial"
-    },
-    "diverge": {
-      "type": "string",
-      "title": "Diverge",
-      "default": "RdYlBu"
-    },
-    "scalebar": {
-      "type": "boolean",
-      "title": "Scalebar",
-      "default": false
-    },
-    "shadestyle": {
-      "type": "string",
-      "title": "Shadestyle",
-      "default": "curve"
-    },
-    "figsize": {
-      "type": "string",
-      "title": "Figsize",
-      "default": "12,8"
-    },
-    "block": {
-      "items": {
-        "type": "string"
-      },
-      "type": "array",
-      "title": "Block"
-    },
-    "layout": {
-      "items": {
-        "type": "string"
-      },
-      "type": "array",
-      "title": "Layout"
-    },
-    "bed": {
-      "anyOf": [
-        {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "title": "Bed"
-    },
-    "use_default_bed": {
-      "type": "boolean",
-      "title": "Use Default Bed",
-      "default": true
-    }
-  },
-  "type": "object",
-  "required": [
-    "block",
-    "layout"
-  ],
-  "title": "SyntenyFigureRequest",
-  "description": "Request body for jcvi synteny rendering."
-}
 ```
 
 ### ValidationError
