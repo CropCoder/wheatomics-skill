@@ -96,23 +96,38 @@ curl -X GET "http://localhost:8000/api/genes/detail/TraesCS5A02G391700"
 
 ---
 
-### GET /api/genes/functions/search
+### GET /api/genes/functions/pfam
 
-**Tags:** Genes
-
-**Search Gene Functions**
+**PfamSearch:** search genes by PFAM domain ID.
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `ID` | string | Yes | - |  |
-| `table` | string, default: Genefunc_table | No | Genefunc_table |  |
+| `ID` | string | Yes | - | PFAM domain ID (e.g., PF00319) |
+| `table` | string, default: Genefunc_table | No | Genefunc_table | Genefunc_table or Genefunc_IWGSC03G_table |
 
 **Example:**
 ```bash
-curl -X GET "http://localhost:8000/api/genes/functions/search?ID=TraesCS5A02G391700"
+curl -X GET "http://localhost:8000/api/genes/functions/pfam?ID=PF00319"
 ```
 
 ---
+
+### GET /api/genes/functions/interval
+
+**IntervalTool:** search genes by chromosome interval.
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `ID` | string | Yes | - | Interval like chr5A:587000000..587200000 |
+| `table` | string, default: Genefunc_table | No | Genefunc_table | Genefunc_table or Genefunc_IWGSC03G_table |
+
+**Example:**
+```bash
+curl -X GET "http://localhost:8000/api/genes/functions/interval?ID=chr5A:587000000..587200000"
+```
+
+---
+
 
 ### GET /api/genes/known/search
 

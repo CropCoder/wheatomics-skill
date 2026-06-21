@@ -57,7 +57,8 @@ ENDPOINTS = {
     ],
     "Genes": [
         ("GET", "genes/detail/{gene_id}", "Gene detail (IWGSC v1/v2/v3)"),
-        ("GET", "genes/functions/search", "Search gene functions (interval/gene/PFAM)"),
+        ("GET", "genes/functions/pfam", "PfamSearch: search genes by PFAM domain (PF prefix)"),
+        ("GET", "genes/functions/interval", "IntervalTool: search genes by chromosome interval"),
         ("GET", "genes/known/search", "Search known genes"),
         ("GET", "genes/known/{gene_id}", "Get known gene detail"),
     ],

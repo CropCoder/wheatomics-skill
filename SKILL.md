@@ -23,7 +23,8 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 
 ### Genes
 - `GET /api/genes/detail/{gene_id}` — Gene detail: description, chromosome, protein length, MW, pI, annotations, JBrowse/Ensembl links. Supports IWGSC v1/v2/v3.
-- `GET /api/genes/functions/search?ID=&table=` — Search gene function annotations. Modes: genomic interval (`chr5A:100000-200000`), gene ID, or PFAM domain (`PF` prefix). Default table: `Genefunc_table`. Other tables: `GO`, `GO_2017`, `KEGG`, `Pfam`, `InterPro`.
+- `GET /api/genes/functions/pfam?ID=&table=` — PfamSearch: search genes by PFAM domain ID (e.g., `PF00319`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
+- `GET /api/genes/functions/interval?ID=&table=` — IntervalTool: search genes by chromosome interval (e.g., `chr5A:587000000..587200000`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
 - `GET /api/genes/known/search?gene_id=` — Search known/characterized genes with phenotypes and references.
 - `GET /api/genes/known/{gene_id}` — Get a specific known gene by clone ID or gene ID.
 
