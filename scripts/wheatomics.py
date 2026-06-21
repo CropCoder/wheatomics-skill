@@ -99,6 +99,24 @@ ENDPOINTS = {
         ("POST", "tasks/primer-check", "Check primer specificity"),
         ("GET", "tasks/primer-result/{job_id}", "Get primer result"),
     ],
+    "PrimerServer2": [
+        ("GET", "PrimerServer2/databases", "List PCR primer databases"),
+        ("GET", "PrimerServer2/config", "Get server config"),
+        ("GET", "PrimerServer2/server-info", "Get server info"),
+        ("POST", "PrimerServer2/jobs", "Submit PCR design job"),
+        ("POST", "PrimerServer2/jobs/check", "Submit specificity check job"),
+        ("GET", "PrimerServer2/jobs/{job_id}", "Get job status"),
+        ("DELETE", "PrimerServer2/jobs/{job_id}", "Delete job"),
+        ("GET", "PrimerServer2/jobs/{job_id}/progress", "Get job progress"),
+        ("GET", "PrimerServer2/jobs/{job_id}/result", "Get job result"),
+        ("GET", "PrimerServer2/jobs/{job_id}/result-html", "Get HTML result"),
+        ("GET", "PrimerServer2/jobs/{job_id}/specificity/{filename}", "Get specificity file"),
+        ("POST", "PrimerServer2/jobs/cleanup", "Cleanup old jobs"),
+    ],
+    "Literature": [
+        ("GET", "literature/search", "Search literature"),
+        ("GET", "literature/tags", "Popular literature tags"),
+    ],
 }
 
 

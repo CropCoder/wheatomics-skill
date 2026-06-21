@@ -30,7 +30,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 
 ### Expression
 - `GET /api/expression/projects` — List all expression projects grouped by category (Tissue, Abiotic, Biotic, Development).
-- `GET /api/expression/query?gene_ids=&project=` — Query expression values with SD error bars for genes in a project. **仅支持 IWGSC v2 (02G) 基因 ID**，非 02G 基因需先用 `id-conversion` 转换。
+- `GET /api/expression/query?gene_ids=&project=` — Query expression values with SD error bars for genes in a project. 支持 v1/v2/v3 输入（API 自动将 01G/03G 转换为 02G 后查询）。
 
 ### Networks (Coexpression & PPI)
 - `GET /api/coexpression/databases` — List available coexpression databases.
@@ -74,6 +74,19 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/tasks/primer-databases?category=` — List available primer reference databases (all/genome/gene).
 - `POST /api/tasks/primer-check` — Check primer specificity against reference genomes.
 - `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.
+### PrimerServer2 (PCR批量引物设计)
+- `GET /api/PrimerServer2/databases` — List available PCR design/check databases, grouped by category.
+- `GET /api/PrimerServer2/config` — Get server configuration limits.
+- `GET /api/PrimerServer2/server-info` — Get server info (CPU/memory/tool versions).
+- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Requires `x-api-key` header.
+- `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job. Requires `x-api-key` header.
+- `GET /api/PrimerServer2/jobs/{job_id}` — Get job status. Requires `x-api-key`.
+- `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job. Requires `x-api-key`.
+- `GET /api/PrimerServer2/jobs/{job_id}/progress` — Get job progress. Requires `x-api-key`.
+- `GET /api/PrimerServer2/jobs/{job_id}/result` — Get job result JSON. Requires `x-api-key`.
+- `GET /api/PrimerServer2/jobs/{job_id}/result-html` — Legacy: get raw HTML result. Requires `x-api-key`.
+- `GET /api/PrimerServer2/jobs/{job_id}/specificity/{filename}` — Get specificity result file. Requires `x-api-key`.
+- `POST /api/PrimerServer2/jobs/cleanup` — Cleanup old job directories. Requires `x-api-key`.
 
 ### Meta
 - `GET /api/about` — Get API name, version, docs URL.
@@ -94,7 +107,7 @@ Use `id-conversion` to convert between versions.
 - Batch sequence uses **spaces** (not commas) between gene IDs.
 - All other multi-gene endpoints use **commas**.
 - `sequence/by-gene` and `sequence/batch` auto-append `.1` suffix if absent.
-- `expression/query` **仅支持 IWGSC v2 (02G)** 基因 ID。其他版本（v1/v3）的基因 ID 需先通过 `id-conversion` 转换为 v2 格式。
+- `expression/query` 支持 v1/v2/v3 基因 ID（API 自动将 01G/03G 转换为 02G 后查询，转换记录在 `genes_converted` 响应字段中）。
 - Coexpression `filter_value`: decimal (e.g., 0.8) = PCC threshold | integer (e.g., 5) = mutual rank.
 - Synteny input accepts both gene IDs and genomic intervals.
 
