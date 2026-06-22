@@ -45,8 +45,8 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/novabrowse?id=` — Run Novabrowse for genome browser visualization.
 
 ### BLAST (在线比对)
-- `GET /api/blast/databases?program=` — List available BLAST databases. `program`: `blastp` / `blastn` / 留空=全部。
-- `GET /api/blast/status` — Check BLAST environment (blastp/blastn/blastdbcmd versions).
+- `GET /api/blast/databases?program=` — List available BLAST databases. Response includes `protein`, `nucleotide`, `total`, and `categories` (by species/type). `program`: `blastp` / `blastn` / `blastx` / `tblastn` / `tblastx` / 留空=全部。
+- `GET /api/blast/status` — Check BLAST environment: blastp/blastn/blastx/tblastn/tblastx + blastdbcmd versions.
 - `POST /api/blast/search` — Submit a BLAST search. Request body (form-urlencoded):
 
   | 参数 | 类型 | 必填 | 默认 | 说明 |
@@ -56,8 +56,10 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
   | `query` | string | **是** | — | FASTA 格式的查询序列 |
   | `evalue` | number | 否 | `10.0` | E-value 阈值 |
   | `max_target_seqs` | integer | 否 | `20` | 最多返回的匹配数 |
-  | `outfmt` | string | 否 | `json` | `json`（结构化）或 `tabular`（文本表格） |
-  | `save_html` | boolean | 否 | `false` | 设为 `true` 生成可访问的 HTML 结果页面 |
+  | `outfmt` | string | 否 | `tabular` | BLAST 内部结果格式，固定为 outfmt 6/tabular（保留兼容） |
+  | `save_html` | boolean | 否 | `true` | 默认生成 HTML 结果页面，通过 `html_url` 字段访问完整比对结果 |
+
+  > 响应说明：`hits` 仍返回在 JSON 中（便于小规模结果读取），但大规模结果请通过 `html_url` 查看完整 BLAST 比对页面。
 
 ### Comparative Genomics
 - `GET /api/homologs/triticeae?gene_id=&type=` — Find homologs across Triticeae species (Chinese Spring, durum, wild emmer, etc.).
