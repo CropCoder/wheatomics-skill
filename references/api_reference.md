@@ -224,7 +224,7 @@ Available source databases (`gene_version`):
 - `TGACv1_result` — TGACv1, e.g. `TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1`
 - `IWGSCv1_result` — IWGSCv1.0, e.g. `TraesCS6B01G342500.1`
 
-Response fields: `query_gene` (input), `reference_gene` (IWGSCv1.1, `code` (mapping relationship class), `length`.
+Response fields: `query_gene` (input), `reference_gene` (IWGSCv1.1), `code` (mapping class), `length`, `not_found`.
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
@@ -233,14 +233,11 @@ Response fields: `query_gene` (input), `reference_gene` (IWGSCv1.1, `code` (mapp
 
 **Example:**
 ```bash
-# IWGSC v2 <-> v3
-curl -X GET "http://localhost:8000/api/id-conversion?ID=TraesCS5A02G391700+TraesCS5A02G123456&gene_version=v3"
-
 # MIPS v2.2 -> IWGSC v1.1 (02G)
-curl -X GET "http://localhost:8000/api/id-conversion?ID=Traes_1AS_E6058767A.1&gene_version=v2"
+curl -X GET "https://wheatomics.sdau.edu.cn/api/id-conversion?ID=Traes_1AS_E6058767A.1&gene_version=MIPS_result"
 
-# TGACv1 -> IWGSC v1.1 (02G)
-curl -X GET "http://localhost:8000/api/id-conversion?ID=TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1&gene_version=v2"
+# TGACv1 -> IWGSC v1.1 (02G), multiple genes (newline-separated)
+curl -X GET "https://wheatomics.sdau.edu.cn/api/id-conversion?ID=TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1%0D%0ATRIAE_CS42_6BL_TGACv1_123456_AA1620000.1&gene_version=TGACv1_result"
 
 # IWGSCv1.0 -> IWGSC v1.1 (02G)
 curl -X GET "http://localhost:8000/api/id-conversion?ID=TraesCS6B01G342500.1&gene_version=v2"
