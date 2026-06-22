@@ -93,6 +93,10 @@ ENDPOINTS = {
         ("GET", "literature/search", "Search literature"),
         ("GET", "literature/tags", "Popular literature tags"),
     ],
+    "Triticeae Papers": [
+        ("GET", "triticeae/papers", "Search Triticeae research papers with filters"),
+        ("GET", "triticeae/papers/{pubmedid}", "Get paper details by PubMed ID"),
+    ],
     "Tasks": [
         ("POST", "tasks/primer-design", "Design SNP primers (CAPS/KASP)"),
         ("GET", "tasks/primer-databases", "List primer reference databases"),

@@ -69,7 +69,88 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/literature/search?keyword=&tag=&page=&page_size=` — Search wheat literature indexed in the database.
 - `GET /api/literature/tags` — Get popular literature tags.
 
+### Triticeae Papers (文献检索)
+- `GET /api/triticeae/papers?gene_name=&trait_label=&evidence_type=&min_confidence=&ai_tags=&functional_gene_tags=&q=&pub_date_start=&pub_date_end=&limit=&offset=` — Search Triticeae research papers with multi-dimensional filters (gene name, trait, evidence, confidence, AI tags, keywords, date range).
+- `GET /api/triticeae/papers/{pubmedid}` — Get paper details by PubMed ID.
+
 ### Tasks (async POST)
+- `POST /api/tasks/primer-design` — Submit a primer design job (CAPS/KASP). See reference for request schema.
+- `GET /api/tasks/primer-databases?category=` — List available primer reference databases (all/genome/gene).
+- `POST /api/tasks/primer-check` — Check primer specificity against reference genomes.
+- `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.
+### PrimerServer2 (PCR批量引物设计)
+- `GET /api/PrimerServer2/databases` — List available PCR design/check databases, grouped by category.
+- `GET /api/PrimerServer2/config` — Get server configuration limits.
+- `GET /api/PrimerServer2/server-info` — Get server info (CPU/memory/tool versions).
+- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Requires `x-api-key` header.
+- `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job. Requires `x-api-key` header.
+- `GET /api/PrimerServer2/jobs/{job_id}` — Get job status. Requires `x-api-key`.
+- `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job. Requires `x-api-key`.
+- `GET /api/PrimerServer2/jobs/{job_id}/progress` — Get job progress. Requires `x-api-key`.
+- `GET /api/PrimerServer2/jobs/{job_id}/result` — Get job result JSON. Requires `x-api-key`.
+- `GET /api/PrimerServer2/jobs/{job_id}/result-html` — Legacy: get raw HTML result. Requires `x-api-key`.
+- `GET /api/PrimerServer2/jobs/{job_id}/specificity/{filename}` — Get specificity result file. Requires `x-api-key`.
+- `POST /api/PrimerServer2/jobs/cleanup` — Cleanup old job directories. Requires `x-api-key`.
+
+### Meta
+- `GET /api/about` — Get API name, version, docs URL.
+- `GET /api/health` — Health check.
+
+## Gene ID formats
+
+WheatOmics supports IWGSC gene IDs in three annotation versions:
+- **v1**: `Traes_5AL_XXXXXXXX` (older, underscore-separated)
+- **v2**: `TraesCS5A02G391700` (most common)
+- **v3**: Similar to v2 with updated annotation
+
+Use `id-conversion` to convert between versions.
+
+## Important constraints
+
+- Sequence by interval: max 5,000,000 bp range.
+- Batch sequence uses **spaces** (not commas) between gene IDs.
+- All other multi-gene endpoints use **commas**.
+- `sequence/by-gene` and `sequence/batch` auto-append `.1` suffix if absent.
+- `expression/query` 支持 v1/v2/v3 基因 ID（API 自动将 01G/03G 转换为 02G 后查询，转换记录在 `genes_converted` 响应字段中）。
+- Coexpression `filter_value`: decimal (e.g., 0.8) = PCC threshold | integer (e.g., 5) = mutual rank.
+- Synteny input accepts both gene IDs and genomic intervals.
+
+## When results are large
+
+For large response payloads (e.g., expression matrices, coexpression networks), summarize key findings rather than dumping raw JSON. Focus on:
+- Number of records returned
+- Top hits with scores/values
+- Notable patterns or outliers
+
+## Helper script
+
+```bash
+# Basic query
+python3 scripts/wheatomics.py genes/detail/TraesCS5A02G391700
+
+# With query params
+python3 scripts/wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,TraesCS5B02G123400 database=CO_PRJEB25639 filter_value=0.8
+
+# BLAST: 查看可用数据库
+python3 scripts/wheatomics.py blast/databases
+
+# BLAST: 蛋白比对
+python3 scripts/wheatomics.py blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
+
+# BLAST: 查看服务器状态
+python3 scripts/wheatomics.py blast/status
+
+# POST request with JSON body file
+python3 scripts/wheatomics.py tasks/primer-design --data @payload.json
+
+# List endpoints
+python3 scripts/wheatomics.py --list
+```
+
+## Reference
+
+See `references/api_reference.md` for complete endpoint schemas with all parameters, types, defaults, and example responses.
+
 - `POST /api/tasks/primer-design` — Submit a primer design job (CAPS/KASP). See reference for request schema.
 - `GET /api/tasks/primer-databases?category=` — List available primer reference databases (all/genome/gene).
 - `POST /api/tasks/primer-check` — Check primer specificity against reference genomes.
