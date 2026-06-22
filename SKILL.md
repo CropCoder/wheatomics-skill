@@ -103,15 +103,15 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/PrimerServer2/databases` — List available PCR design/check databases, grouped by category.
 - `GET /api/PrimerServer2/config` — Get server configuration limits.
 - `GET /api/PrimerServer2/server-info` — Get server info (CPU/memory/tool versions).
-- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域, 格式: `chr start bp minSize maxSize`), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性库, 默认 `primer_Chinese_Spring2.1.genome`). Requires `x-api-key`.
-- `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job. Requires `x-api-key` header.
-- `GET /api/PrimerServer2/jobs/{job_id}` — Get job status. Requires `x-api-key`.
-- `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job. Requires `x-api-key`.
-- `GET /api/PrimerServer2/jobs/{job_id}/progress` — Get job progress. Requires `x-api-key`.
-- `GET /api/PrimerServer2/jobs/{job_id}/result` — Get job result JSON. Requires `x-api-key`.
-- `GET /api/PrimerServer2/jobs/{job_id}/result-html` — Legacy: get raw HTML result. Requires `x-api-key`.
-- `GET /api/PrimerServer2/jobs/{job_id}/specificity/{filename}` — Get specificity result file. Requires `x-api-key`.
-- `POST /api/PrimerServer2/jobs/cleanup` — Cleanup old job directories. Requires `x-api-key`.
+- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域, 格式: `chr start bp minSize maxSize`), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性库, 默认 `primer_Chinese_Spring2.1.genome`).
+- `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job.
+- `GET /api/PrimerServer2/jobs/{job_id}` — Get job status.
+- `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job.
+- `GET /api/PrimerServer2/jobs/{job_id}/progress` — Get job progress.
+- `GET /api/PrimerServer2/jobs/{job_id}/result` — Get job result JSON.
+- `GET /api/PrimerServer2/jobs/{job_id}/result-html` — Legacy: get raw HTML result.
+- `GET /api/PrimerServer2/jobs/{job_id}/specificity/{filename}` — Get specificity result file.
+- `POST /api/PrimerServer2/jobs/cleanup` — Cleanup old job directories.
 
 ### Meta
 - `GET /api/about` — Get API name, version, docs URL.
@@ -203,15 +203,15 @@ See `references/api_reference.md` for complete endpoint schemas with all paramet
 - `GET /api/PrimerServer2/databases` — List available PCR design/check databases, grouped by category.
 - `GET /api/PrimerServer2/config` — Get server configuration limits.
 - `GET /api/PrimerServer2/server-info` — Get server info (CPU/memory/tool versions).
-- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域, 格式: `chr start bp minSize maxSize`), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性库, 默认 `primer_Chinese_Spring2.1.genome`). Requires `x-api-key`.
-- `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job. Requires `x-api-key` header.
-- `GET /api/PrimerServer2/jobs/{job_id}` — Get job status. Requires `x-api-key`.
-- `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job. Requires `x-api-key`.
-- `GET /api/PrimerServer2/jobs/{job_id}/progress` — Get job progress. Requires `x-api-key`.
-- `GET /api/PrimerServer2/jobs/{job_id}/result` — Get job result JSON. Requires `x-api-key`.
-- `GET /api/PrimerServer2/jobs/{job_id}/result-html` — Legacy: get raw HTML result. Requires `x-api-key`.
-- `GET /api/PrimerServer2/jobs/{job_id}/specificity/{filename}` — Get specificity result file. Requires `x-api-key`.
-- `POST /api/PrimerServer2/jobs/cleanup` — Cleanup old job directories. Requires `x-api-key`.
+- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域, 格式: `chr start bp minSize maxSize`), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性库, 默认 `primer_Chinese_Spring2.1.genome`).
+- `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job.
+- `GET /api/PrimerServer2/jobs/{job_id}` — Get job status.
+- `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job.
+- `GET /api/PrimerServer2/jobs/{job_id}/progress` — Get job progress.
+- `GET /api/PrimerServer2/jobs/{job_id}/result` — Get job result JSON.
+- `GET /api/PrimerServer2/jobs/{job_id}/result-html` — Legacy: get raw HTML result.
+- `GET /api/PrimerServer2/jobs/{job_id}/specificity/{filename}` — Get specificity result file.
+- `POST /api/PrimerServer2/jobs/cleanup` — Cleanup old job directories.
 
 ### Meta
 - `GET /api/about` — Get API name, version, docs URL.
