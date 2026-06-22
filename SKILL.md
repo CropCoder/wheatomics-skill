@@ -62,7 +62,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 ### Comparative Genomics
 - `GET /api/homologs/triticeae?gene_id=&type=` — Find homologs across Triticeae species (Chinese Spring, durum, wild emmer, etc.).
 - `GET /api/homologs/wheat-rice-arabidopsis?gene_id=` — Wheat-rice-Arabidopsis ortholog triplets.
-- `GET /api/id-conversion?ID=&gene_version=` — Convert external gene IDs to IWGSC v1.1 (02G) format. Input: transcript IDs with `.1` suffix, space-separated (max 100). `gene_version` values: `MIPS_result` (MIPSv2.2, e.g. `Traes_1AS_E6058767A.1`), `TGACv1_result` (TGACv1, e.g. `TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1`), `IWGSCv1_result` (IWGSCv1.0, e.g. `TraesCS6B01G342500.1`). Response includes mapping `code` (relationship class) and `length` fields.
+- `GET /api/id-conversion?ID=&gene_version=` — Convert external gene IDs to IWGSC v1.1 (02G) format. Input: transcript IDs with `.1` suffix, newline-separated (%0D%0A). `gene_version` values: `MIPS_result` (MIPSv2.2, e.g. `Traes_1AS_E6058767A.1`), `TGACv1_result` (TGACv1, e.g. `TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1`), `IWGSCv1_result` (IWGSCv1.0, e.g. `TraesCS6B01G342500.1`). Output `reference_gene` is 02G format without `.1` (gene-level). Response includes `code` (mapping class) and `length` fields.
 - `GET /api/synteny/search?ID=&table=` — Search syntenic blocks. Input: genomic interval or gene ID.
 
 ### Literature
