@@ -396,6 +396,130 @@ curl -X POST "http://localhost:8000/api/tasks/primer-design" \
 ```
 
 ---
+### GET /api/PrimerServer2/config
+
+**Get Config Endpoint**
+
+---
+
+
+
+### GET /api/PrimerServer2/databases
+
+**Get Databases**
+
+---
+
+
+
+### POST /api/PrimerServer2/jobs
+
+**Create Job**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+
+**Request Body:** DesignJobRequest (application/json)
+---
+
+
+
+### POST /api/PrimerServer2/jobs/check
+
+**Create Check Job**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+
+**Request Body:** CheckJobRequest (application/json)
+---
+
+
+
+### POST /api/PrimerServer2/jobs/cleanup
+
+**Cleanup Jobs**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+---
+
+
+
+### GET /api/PrimerServer2/jobs/{job_id}
+
+**Get Job**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `job_id` | string | Yes |  |
+---
+
+
+
+### DELETE /api/PrimerServer2/jobs/{job_id}
+
+**Delete Job**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `job_id` | string | Yes |  |
+---
+
+
+
+### GET /api/PrimerServer2/jobs/{job_id}/progress
+
+**Get Progress**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `job_id` | string | Yes |  |
+---
+
+
+
+### GET /api/PrimerServer2/jobs/{job_id}/result
+
+**Get Result**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `job_id` | string | Yes |  |
+| `job_type` | string | No |  |
+---
+
+
+
+### GET /api/PrimerServer2/jobs/{job_id}/result-html
+
+**Get Result Html**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `job_id` | string | Yes |  |
+---
+
+
+
+### GET /api/PrimerServer2/jobs/{job_id}/specificity/{filename}
+
+**Get Specificity Result**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `job_id` | string | Yes |  |
+| `filename` | string | Yes |  |
+---
+
+
+
+### GET /api/PrimerServer2/server-info
+
+**Get Server Info**
+
+---
+
 
 ## Schemas
 
@@ -689,6 +813,1140 @@ curl -X POST "http://localhost:8000/api/tasks/primer-design" \
 }
 ```
 
+```
+
+
+
+### DesignJobRequest
+
+```json
+{
+  "properties": {
+    "size_start": {
+      "type": "integer",
+      "maximum": 100000.0,
+      "minimum": 1.0,
+      "title": "Size Start",
+      "default": 50
+    },
+    "size_stop": {
+      "type": "integer",
+      "maximum": 1000000.0,
+      "minimum": 1.0,
+      "title": "Size Stop",
+      "default": 5000
+    },
+    "min_Tm_diff": {
+      "type": "integer",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Min Tm Diff",
+      "default": 20
+    },
+    "retain": {
+      "type": "integer",
+      "maximum": 1000.0,
+      "minimum": 1.0,
+      "title": "Retain",
+      "default": 10
+    },
+    "end3_mismatch_threshold": {
+      "type": "integer",
+      "maximum": 5.0,
+      "minimum": 0.0,
+      "title": "End3 Mismatch Threshold",
+      "default": 5
+    },
+    "max_report_amplicon": {
+      "type": "integer",
+      "maximum": 10000.0,
+      "minimum": 1.0,
+      "title": "Max Report Amplicon",
+      "default": 50
+    },
+    "blast_e_value": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Blast E Value",
+      "default": 30000
+    },
+    "blast_word_size": {
+      "type": "integer",
+      "maximum": 11.0,
+      "minimum": 4.0,
+      "title": "Blast Word Size",
+      "default": 7
+    },
+    "blast_identity": {
+      "type": "integer",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Blast Identity",
+      "default": 60
+    },
+    "blast_max_hsps": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Blast Max Hsps",
+      "default": 500
+    },
+    "conc_primer": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Primer",
+      "default": 100.0
+    },
+    "conc_dNTPs": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Dntps",
+      "default": 0.2
+    },
+    "conc_Na": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Na",
+      "default": 0.0
+    },
+    "conc_K": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc K",
+      "default": 50.0
+    },
+    "conc_Tris": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Tris",
+      "default": 10.0
+    },
+    "conc_Mg": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Mg",
+      "default": 1.5
+    },
+    "selected-databases": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "title": "Selected-Databases"
+    },
+    "custom-db-sequences": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Custom-Db-Sequences"
+    },
+    "app-type": {
+      "$ref": "#/components/schemas/JobType"
+    },
+    "selectTemplate": {
+      "type": "string",
+      "title": "Selecttemplate"
+    },
+    "template-regions": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Template-Regions"
+    },
+    "custom-template-sequences": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Custom-Template-Sequences"
+    },
+    "region_type": {
+      "$ref": "#/components/schemas/RegionType",
+      "default": "SEQUENCE_TARGET"
+    },
+    "product_size_min": {
+      "type": "integer",
+      "maximum": 50000.0,
+      "minimum": 30.0,
+      "title": "Product Size Min",
+      "default": 100
+    },
+    "product_size_max": {
+      "type": "integer",
+      "maximum": 50000.0,
+      "minimum": 30.0,
+      "title": "Product Size Max",
+      "default": 1000
+    },
+    "PRIMER_MIN_SIZE": {
+      "type": "integer",
+      "maximum": 35.0,
+      "minimum": 1.0,
+      "title": "Primer Min Size",
+      "default": 18
+    },
+    "PRIMER_OPT_SIZE": {
+      "type": "integer",
+      "maximum": 35.0,
+      "minimum": 1.0,
+      "title": "Primer Opt Size",
+      "default": 20
+    },
+    "PRIMER_MAX_SIZE": {
+      "type": "integer",
+      "maximum": 35.0,
+      "minimum": 1.0,
+      "title": "Primer Max Size",
+      "default": 23
+    },
+    "PRIMER_MIN_GC": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Primer Min Gc",
+      "default": 35.0
+    },
+    "PRIMER_OPT_GC_PERCENT": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Primer Opt Gc Percent",
+      "default": 50.0
+    },
+    "PRIMER_MAX_GC": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Primer Max Gc",
+      "default": 65.0
+    },
+    "PRIMER_MIN_TM": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Primer Min Tm",
+      "default": 57.0
+    },
+    "PRIMER_OPT_TM": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Primer Opt Tm",
+      "default": 60.0
+    },
+    "PRIMER_MAX_TM": {
+      "type": "number",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Primer Max Tm",
+      "default": 63.0
+    },
+    "PRIMER_PAIR_MAX_DIFF_TM": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Primer Pair Max Diff Tm",
+      "default": 3.0
+    },
+    "PRIMER_NUM_RETURN": {
+      "type": "integer",
+      "maximum": 1000.0,
+      "minimum": 1.0,
+      "title": "Primer Num Return",
+      "default": 30
+    },
+    "PRIMER_MIN_LEFT_THREE_PRIME_DISTANCE": {
+      "type": "integer",
+      "maximum": 10.0,
+      "minimum": -1.0,
+      "title": "Primer Min Left Three Prime Distance",
+      "default": 3
+    },
+    "PRIMER_MIN_RIGHT_THREE_PRIME_DISTANCE": {
+      "type": "integer",
+      "maximum": 10.0,
+      "minimum": -1.0,
+      "title": "Primer Min Right Three Prime Distance",
+      "default": 3
+    },
+    "PRIMER_MAX_END_STABILITY": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Primer Max End Stability",
+      "default": 9.0
+    },
+    "PRIMER_LOWERCASE_MASKING": {
+      "type": "integer",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Primer Lowercase Masking",
+      "default": 0
+    },
+    "PRIMER_MAX_SELF_ANY_TH": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Primer Max Self Any Th",
+      "default": 45.0
+    },
+    "PRIMER_PAIR_MAX_COMPL_ANY_TH": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Primer Pair Max Compl Any Th",
+      "default": 45.0
+    },
+    "PRIMER_MAX_SELF_END_TH": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Primer Max Self End Th",
+      "default": 35.0
+    },
+    "PRIMER_PAIR_MAX_COMPL_END_TH": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Primer Pair Max Compl End Th",
+      "default": 35.0
+    },
+    "PRIMER_MAX_HAIRPIN_TH": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Primer Max Hairpin Th",
+      "default": 24.0
+    }
+  },
+  "type": "object",
+  "required": [
+    "app-type",
+    "selectTemplate"
+  ],
+  "title": "DesignJobRequest"
+}
+```
+
+### CheckJobRequest
+
+```json
+{
+  "properties": {
+    "size_start": {
+      "type": "integer",
+      "maximum": 100000.0,
+      "minimum": 1.0,
+      "title": "Size Start",
+      "default": 50
+    },
+    "size_stop": {
+      "type": "integer",
+      "maximum": 1000000.0,
+      "minimum": 1.0,
+      "title": "Size Stop",
+      "default": 5000
+    },
+    "min_Tm_diff": {
+      "type": "integer",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Min Tm Diff",
+      "default": 20
+    },
+    "retain": {
+      "type": "integer",
+      "maximum": 1000.0,
+      "minimum": 1.0,
+      "title": "Retain",
+      "default": 10
+    },
+    "end3_mismatch_threshold": {
+      "type": "integer",
+      "maximum": 5.0,
+      "minimum": 0.0,
+      "title": "End3 Mismatch Threshold",
+      "default": 5
+    },
+    "max_report_amplicon": {
+      "type": "integer",
+      "maximum": 10000.0,
+      "minimum": 1.0,
+      "title": "Max Report Amplicon",
+      "default": 50
+    },
+    "blast_e_value": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Blast E Value",
+      "default": 30000
+    },
+    "blast_word_size": {
+      "type": "integer",
+      "maximum": 11.0,
+      "minimum": 4.0,
+      "title": "Blast Word Size",
+      "default": 7
+    },
+    "blast_identity": {
+      "type": "integer",
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Blast Identity",
+      "default": 60
+    },
+    "blast_max_hsps": {
+      "type": "integer",
+      "minimum": 1.0,
+      "title": "Blast Max Hsps",
+      "default": 500
+    },
+    "conc_primer": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Primer",
+      "default": 100.0
+    },
+    "conc_dNTPs": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Dntps",
+      "default": 0.2
+    },
+    "conc_Na": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Na",
+      "default": 0.0
+    },
+    "conc_K": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc K",
+      "default": 50.0
+    },
+    "conc_Tris": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Tris",
+      "default": 10.0
+    },
+    "conc_Mg": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Conc Mg",
+      "default": 1.5
+    },
+    "selected-databases": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "title": "Selected-Databases"
+    },
+    "custom-db-sequences": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Custom-Db-Sequences"
+    },
+    "app-type": {
+      "$ref": "#/components/schemas/JobType"
+    },
+    "check-primers": {
+      "type": "string",
+      "title": "Check-Primers"
+    }
+  },
+  "type": "object",
+  "required": [
+    "app-type",
+    "check-primers"
+  ],
+  "title": "CheckJobRequest"
+}
+```
+
+### JobResponse
+
+```json
+{
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "title": "Jobid"
+    },
+    "status": {
+      "$ref": "#/components/schemas/JobStatus"
+    },
+    "createdAt": {
+      "type": "string",
+      "title": "Createdat"
+    },
+    "message": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Message"
+    }
+  },
+  "type": "object",
+  "required": [
+    "jobId",
+    "status",
+    "createdAt"
+  ],
+  "title": "JobResponse"
+}
+```
+
+### JobResultResponse
+
+```json
+{
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "title": "Jobid"
+    },
+    "jobType": {
+      "type": "string",
+      "title": "Jobtype"
+    },
+    "status": {
+      "$ref": "#/components/schemas/JobStatus"
+    },
+    "html": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Html"
+    },
+    "designPrimers": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/components/schemas/PrimerResult"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Designprimers"
+    },
+    "checkResults": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/components/schemas/CheckResult"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Checkresults"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Error"
+    }
+  },
+  "type": "object",
+  "required": [
+    "jobId",
+    "jobType",
+    "status"
+  ],
+  "title": "JobResultResponse"
+}
+```
+
+### ProgressResponse
+
+```json
+{
+  "properties": {
+    "total": {
+      "type": "integer",
+      "title": "Total"
+    },
+    "finished": {
+      "type": "integer",
+      "title": "Finished"
+    },
+    "percent": {
+      "type": "integer",
+      "title": "Percent"
+    },
+    "stage": {
+      "type": "string",
+      "title": "Stage"
+    }
+  },
+  "type": "object",
+  "required": [
+    "total",
+    "finished",
+    "percent",
+    "stage"
+  ],
+  "title": "ProgressResponse"
+}
+```
+
+### ServerInfoResponse
+
+```json
+{
+  "properties": {
+    "currentTime": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Currenttime"
+    },
+    "cpuInfo": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Cpuinfo"
+    },
+    "memTotal": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Memtotal"
+    },
+    "memFree": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Memfree"
+    },
+    "samtoolsVersion": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Samtoolsversion"
+    },
+    "blastnVersion": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Blastnversion"
+    },
+    "primer3Version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Primer3Version"
+    }
+  },
+  "type": "object",
+  "title": "ServerInfoResponse"
+}
+```
+
+### ConfigResponse
+
+```json
+{
+  "properties": {
+    "limitSite": {
+      "type": "integer",
+      "title": "Limitsite"
+    },
+    "limitPrimer": {
+      "type": "integer",
+      "title": "Limitprimer"
+    },
+    "limitDatabase": {
+      "type": "integer",
+      "title": "Limitdatabase"
+    },
+    "useCPU": {
+      "type": "integer",
+      "title": "Usecpu"
+    },
+    "showInfo": {
+      "type": "boolean",
+      "title": "Showinfo"
+    },
+    "removeTmp": {
+      "type": "boolean",
+      "title": "Removetmp"
+    }
+  },
+  "type": "object",
+  "required": [
+    "limitSite",
+    "limitPrimer",
+    "limitDatabase",
+    "useCPU",
+    "showInfo",
+    "removeTmp"
+  ],
+  "title": "ConfigResponse"
+}
+```
+
+### DatabasesResponse
+
+```json
+{
+  "properties": {
+    "groups": {
+      "items": {
+        "$ref": "#/components/schemas/DatabaseGroup"
+      },
+      "type": "array",
+      "title": "Groups"
+    }
+  },
+  "type": "object",
+  "required": [
+    "groups"
+  ],
+  "title": "DatabasesResponse"
+}
+```
+
+### DatabaseGroup
+
+```json
+{
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name"
+    },
+    "databases": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object",
+      "title": "Databases"
+    }
+  },
+  "type": "object",
+  "required": [
+    "name",
+    "databases"
+  ],
+  "title": "DatabaseGroup"
+}
+```
+
+### PrimerResult
+
+```json
+{
+  "properties": {
+    "siteId": {
+      "type": "string",
+      "title": "Siteid"
+    },
+    "rank": {
+      "type": "integer",
+      "title": "Rank"
+    },
+    "leftSeq": {
+      "type": "string",
+      "title": "Leftseq"
+    },
+    "rightSeq": {
+      "type": "string",
+      "title": "Rightseq"
+    },
+    "productSize": {
+      "type": "integer",
+      "title": "Productsize"
+    },
+    "penalty": {
+      "type": "number",
+      "title": "Penalty"
+    },
+    "leftTm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Lefttm"
+    },
+    "rightTm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Righttm"
+    },
+    "leftGc": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Leftgc"
+    },
+    "rightGc": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Rightgc"
+    },
+    "leftPos": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Leftpos"
+    },
+    "rightPos": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Rightpos"
+    },
+    "leftLen": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Leftlen"
+    },
+    "rightLen": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Rightlen"
+    },
+    "leftSelfAny": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Leftselfany"
+    },
+    "rightSelfAny": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Rightselfany"
+    },
+    "leftSelfEnd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Leftselfend"
+    },
+    "rightSelfEnd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Rightselfend"
+    },
+    "leftHairpin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Lefthairpin"
+    },
+    "rightHairpin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Righthairpin"
+    },
+    "leftEndStability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Leftendstability"
+    },
+    "rightEndStability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Rightendstability"
+    },
+    "pairComplAny": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Paircomplany"
+    },
+    "pairComplEnd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Paircomplend"
+    },
+    "primer3Rank": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Primer3Rank"
+    },
+    "databases": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "type": "array",
+      "title": "Databases"
+    }
+  },
+  "type": "object",
+  "required": [
+    "siteId",
+    "rank",
+    "leftSeq",
+    "rightSeq",
+    "productSize",
+    "penalty",
+    "databases"
+  ],
+  "title": "PrimerResult"
+}
+```
+
+### CheckResult
+
+```json
+{
+  "properties": {
+    "siteId": {
+      "type": "string",
+      "title": "Siteid"
+    },
+    "rank": {
+      "type": "integer",
+      "title": "Rank"
+    },
+    "database": {
+      "type": "string",
+      "title": "Database"
+    },
+    "ampliconNumber": {
+      "type": "integer",
+      "title": "Ampliconnumber"
+    },
+    "primerSeqs": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "title": "Primerseqs"
+    }
+  },
+  "type": "object",
+  "required": [
+    "siteId",
+    "rank",
+    "database",
+    "ampliconNumber",
+    "primerSeqs"
+  ],
+  "title": "CheckResult"
+}
+```
+
+### JobStatus
+
+```json
+{
+  "type": "string",
+  "enum": [
+    "pending",
+    "running",
+    "done",
+    "error",
+    "stopped"
+  ],
+  "title": "JobStatus"
+}
+```
+
+### JobType
+
+```json
+{
+  "type": "string",
+  "enum": [
+    "design",
+    "check"
+  ],
+  "title": "JobType"
+}
+```
+
+### RegionType
+
+```json
+{
+  "type": "string",
+  "enum": [
+    "SEQUENCE_TARGET",
+    "SEQUENCE_INCLUDED_REGION",
+    "FORCE_END"
+  ],
+  "title": "RegionType"
+}
 ```
 
 ### ValidationError
