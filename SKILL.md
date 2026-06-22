@@ -56,9 +56,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
   | `query` | string | **是** | — | FASTA 格式的查询序列 |
   | `evalue` | number | 否 | `10.0` | E-value 阈值 |
   | `max_target_seqs` | integer | 否 | `20` | 最多返回的匹配数 |
-  | `outfmt` | string | 否 | `tabular` | 结果格式: `tabular`(outfmt 6, 表格) / `traditional`(outfmt 0, 带比对) / `both`(同时生成两种) |
-  
-  > 响应说明：结果返回 `download_url`（下载链接数组，每种格式一个链接）和 `outfmt`（生成格式数组）。无 `hits` 字段——结果需下载文件查看。格式包含 `tabular`(outfmt 6 表格) 和 `traditional`(outfmt 0 传统格式，含对比详情)。
+  > 响应说明：结果无 `hits` 字段，需下载文件查看。始终同时生成 `.tsv`(outfmt 6, 制表符分隔, 易解析) 和 `.txt`(outfmt 0, 含比对信息, 易阅读) 两种格式，下载链接在 `download_url` 数组中，`outfmt` 字段标识已生成的格式。
 
 ### Comparative Genomics
 
@@ -79,10 +77,15 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `POST /api/tasks/primer-check` — Check primer specificity against reference genomes.
 - `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.
 ### PrimerServer2 (PCR批量引物设计)
+
+工作流程:
+  Agent 引导用户确认: 模板库(selectTemplate) → 目标区域(templateRegions) → 产物大小(productSizeMin/Max) → 特异性检测库(selectedDatabases)
+  用户确认后提交 `POST /api/PrimerServer2/jobs`，轮询 `progress` 获取结果。
+
 - `GET /api/PrimerServer2/databases` — List available PCR design/check databases, grouped by category.
 - `GET /api/PrimerServer2/config` — Get server configuration limits.
 - `GET /api/PrimerServer2/server-info` — Get server info (CPU/memory/tool versions).
-- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Requires `x-api-key` header.
+- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性检测库). Requires `x-api-key`.
 - `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job. Requires `x-api-key` header.
 - `GET /api/PrimerServer2/jobs/{job_id}` — Get job status. Requires `x-api-key`.
 - `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job. Requires `x-api-key`.
@@ -156,10 +159,15 @@ See `references/api_reference.md` for complete endpoint schemas with all paramet
 - `POST /api/tasks/primer-check` — Check primer specificity against reference genomes.
 - `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.
 ### PrimerServer2 (PCR批量引物设计)
+
+工作流程:
+  Agent 引导用户确认: 模板库(selectTemplate) → 目标区域(templateRegions) → 产物大小(productSizeMin/Max) → 特异性检测库(selectedDatabases)
+  用户确认后提交 `POST /api/PrimerServer2/jobs`，轮询 `progress` 获取结果。
+
 - `GET /api/PrimerServer2/databases` — List available PCR design/check databases, grouped by category.
 - `GET /api/PrimerServer2/config` — Get server configuration limits.
 - `GET /api/PrimerServer2/server-info` — Get server info (CPU/memory/tool versions).
-- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Requires `x-api-key` header.
+- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性检测库). Requires `x-api-key`.
 - `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job. Requires `x-api-key` header.
 - `GET /api/PrimerServer2/jobs/{job_id}` — Get job status. Requires `x-api-key`.
 - `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job. Requires `x-api-key`.
