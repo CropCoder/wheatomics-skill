@@ -78,14 +78,32 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.
 ### PrimerServer2 (PCR批量引物设计)
 
+
 工作流程:
-  Agent 引导用户确认: 模板库(selectTemplate) → 目标区域(templateRegions) → 产物大小(productSizeMin/Max) → 特异性检测库(selectedDatabases)
-  用户确认后提交 `POST /api/PrimerServer2/jobs`，轮询 `progress` 获取结果。
+  Step 1 - 收集需求: Agent 询问用户目标基因/区间、扩增方式(全长/区域内)、产物大小范围、参考基因组
+  Step 2 - 整理参数给用户确认:
+    模板库:      primer_Chinese_Spring2.1.genome
+    目标:        Chr3B:569382161-569389178
+    Region Type: SEQUENCE_TARGET（区域内）
+    产物大小:    150-800 bp
+    特异性库:    primer_Chinese_Spring2.1.genome
+  Step 3 - 用户确认后提交:
+
+    POST /api/PrimerServer2/jobs
+    {
+  "app-type": "design",
+  "selectTemplate": "primer_Chinese_Spring2.1.genome",
+  "template-regions": "Chr3B 569382161 5017 150 800",
+  "region_type": "SEQUENCE_TARGET",
+  "product_size_min": 150,
+  "product_size_max": 800,
+  "selected-databases": ["primer_Chinese_Spring2.1.genome"]
+}
 
 - `GET /api/PrimerServer2/databases` — List available PCR design/check databases, grouped by category.
 - `GET /api/PrimerServer2/config` — Get server configuration limits.
 - `GET /api/PrimerServer2/server-info` — Get server info (CPU/memory/tool versions).
-- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性检测库). Requires `x-api-key`.
+- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域, 格式: `chr start bp minSize maxSize`), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性库, 默认 `primer_Chinese_Spring2.1.genome`). Requires `x-api-key`.
 - `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job. Requires `x-api-key` header.
 - `GET /api/PrimerServer2/jobs/{job_id}` — Get job status. Requires `x-api-key`.
 - `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job. Requires `x-api-key`.
@@ -160,14 +178,32 @@ See `references/api_reference.md` for complete endpoint schemas with all paramet
 - `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.
 ### PrimerServer2 (PCR批量引物设计)
 
+
 工作流程:
-  Agent 引导用户确认: 模板库(selectTemplate) → 目标区域(templateRegions) → 产物大小(productSizeMin/Max) → 特异性检测库(selectedDatabases)
-  用户确认后提交 `POST /api/PrimerServer2/jobs`，轮询 `progress` 获取结果。
+  Step 1 - 收集需求: Agent 询问用户目标基因/区间、扩增方式(全长/区域内)、产物大小范围、参考基因组
+  Step 2 - 整理参数给用户确认:
+    模板库:      primer_Chinese_Spring2.1.genome
+    目标:        Chr3B:569382161-569389178
+    Region Type: SEQUENCE_TARGET（区域内）
+    产物大小:    150-800 bp
+    特异性库:    primer_Chinese_Spring2.1.genome
+  Step 3 - 用户确认后提交:
+
+    POST /api/PrimerServer2/jobs
+    {
+  "app-type": "design",
+  "selectTemplate": "primer_Chinese_Spring2.1.genome",
+  "template-regions": "Chr3B 569382161 5017 150 800",
+  "region_type": "SEQUENCE_TARGET",
+  "product_size_min": 150,
+  "product_size_max": 800,
+  "selected-databases": ["primer_Chinese_Spring2.1.genome"]
+}
 
 - `GET /api/PrimerServer2/databases` — List available PCR design/check databases, grouped by category.
 - `GET /api/PrimerServer2/config` — Get server configuration limits.
 - `GET /api/PrimerServer2/server-info` — Get server info (CPU/memory/tool versions).
-- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性检测库). Requires `x-api-key`.
+- `POST /api/PrimerServer2/jobs` — Submit a PCR primer design job. Key params: `selectTemplate`(模板库), `templateRegions`(目标区域, 格式: `chr start bp minSize maxSize`), `productSizeMin/Max`(产物大小), `selectedDatabases`(特异性库, 默认 `primer_Chinese_Spring2.1.genome`). Requires `x-api-key`.
 - `POST /api/PrimerServer2/jobs/check` — Submit a primer specificity check job. Requires `x-api-key` header.
 - `GET /api/PrimerServer2/jobs/{job_id}` — Get job status. Requires `x-api-key`.
 - `DELETE /api/PrimerServer2/jobs/{job_id}` — Cancel/delete a job. Requires `x-api-key`.
