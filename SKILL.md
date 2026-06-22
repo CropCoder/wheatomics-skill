@@ -56,10 +56,11 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
   | `query` | string | **是** | — | FASTA 格式的查询序列 |
   | `evalue` | number | 否 | `10.0` | E-value 阈值 |
   | `max_target_seqs` | integer | 否 | `20` | 最多返回的匹配数 |
-  | `outfmt` | string | 否 | `tabular` | BLAST 内部结果格式，固定为 outfmt 6/tabular（保留兼容） |
-  | `save_html` | boolean | 否 | `true` | 默认生成 HTML 结果页面，通过 `html_url` 字段访问完整比对结果 |
+  | `outfmt` | string | 否 | `tabular` | 结果格式: `tabular`(outfmt 6, 表格) / `traditional`(outfmt 0, 带比对) / `both`(同时生成两种) |
+  
+  > 响应说明：结果返回 `download_url`（下载链接数组，每种格式一个链接）和 `outfmt`（生成格式数组）。无 `hits` 字段——结果需下载文件查看。格式包含 `tabular`(outfmt 6 表格) 和 `traditional`(outfmt 0 传统格式，含对比详情)。
 
-  > 响应说明：`hits` 仍返回在 JSON 中（便于小规模结果读取），但大规模结果请通过 `html_url` 查看完整 BLAST 比对页面。
+### Comparative Genomics
 
 ### Comparative Genomics
 - `GET /api/homologs/triticeae?gene_id=&type=` — Find homologs across Triticeae species (Chinese Spring, durum, wild emmer, etc.).
@@ -134,7 +135,7 @@ python3 scripts/wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,Tra
 python3 scripts/wheatomics.py blast/databases
 
 # BLAST: 蛋白比对
-python3 scripts/wheatomics.py blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
+python3 scripts/wheatomics.py blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5
 
 # BLAST: 查看服务器状态
 python3 scripts/wheatomics.py blast/status
@@ -211,7 +212,7 @@ python3 scripts/wheatomics.py coexpression/query gene_ids=TraesCS5A02G391700,Tra
 python3 scripts/wheatomics.py blast/databases
 
 # BLAST: 蛋白比对
-python3 scripts/wheatomics.py blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5 save_html=true
+python3 scripts/wheatomics.py blast/search database=Fielder_protein query='>seq\nMSSSTGTPSA...' program=blastp max_target_seqs=5
 
 # BLAST: 查看服务器状态
 python3 scripts/wheatomics.py blast/status
