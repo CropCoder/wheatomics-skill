@@ -245,42 +245,6 @@ curl -X GET "http://localhost:8000/api/id-conversion?ID=TraesCS6B01G342500.1&gen
 
 ---
 
-### GET /api/literature/search
-
-**Tags:** Literature
-
-**Search Literature**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `search` | ? | No | - |  |
-| `tag` | ? | No | - |  |
-| `limit` | integer, default: 50 | No | 50 |  |
-
-**Example:**
-```bash
-curl -X GET "http://localhost:8000/api/literature/search?search=drought+tolerance&limit=10"
-```
-
----
-
-### GET /api/literature/tags
-
-**Tags:** Literature
-
-**Popular Tags**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `limit` | integer, default: 20 | No | 20 |  |
-
-**Example:**
-```bash
-curl -X GET "http://localhost:8000/api/literature/tags?limit=10"
-```
-
----
-
 ### GET /api/novabrowse
 
 **Tags:** Sequences

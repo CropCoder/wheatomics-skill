@@ -1,6 +1,6 @@
 ---
 name: wheatomics
-description: Access the WheatOmics wheat multi-omics bioinformatics database (https://wheatomics.sdau.edu.cn) via its REST API. Provides gene details, coexpression networks, expression profiles, PPI networks, sequence retrieval, homolog search, synteny analysis, literature search, primer design, and more. Use when Codex needs to query wheat genomics data, retrieve gene sequences or annotations, analyze coexpression/PPI networks, search homologs or synteny across Triticeae species, design SNP primers, or look up wheat literature. Supports IWGSC v1/v2/v3 gene IDs.
+description: Access the WheatOmics wheat multi-omics bioinformatics database (https://wheatomics.sdau.edu.cn) via its REST API. Provides gene details, coexpression networks, expression profiles, PPI networks, sequence retrieval, homolog search, synteny analysis, Triticeae papers, primer design, and more. Use when Codex needs to query wheat genomics data, retrieve gene sequences or annotations, analyze coexpression/PPI networks, search homologs or synteny across Triticeae species, design SNP primers, or search Triticeae papers. Supports IWGSC v1/v2/v3 gene IDs.
 ---
 
 # WheatOmics Skill
@@ -14,7 +14,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 
 ## Usage pattern
 
-1. Identify the data domain (genes, expression, coexpression, PPI, sequences, homologs, synteny, literature, tasks).
+1. Identify the data domain (genes, expression, coexpression, PPI, sequences, homologs, synteny, Triticeae papers, tasks).
 2. Check `references/api_reference.md` for detailed endpoint schemas, parameter meanings, and response formats.
 3. Use `python3 scripts/wheatomics.py <endpoint> [params...]` to query. The script prints formatted JSON.
 4. For multi-gene queries, join gene IDs with commas (or spaces for batch sequence).
@@ -65,12 +65,9 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/id-conversion?ID=&gene_version=` — Convert external gene IDs to IWGSC v1.1 (02G) format. Input: transcript IDs with `.1` suffix, newline-separated (%0D%0A). `gene_version` values: `MIPS_result` (MIPSv2.2, e.g. `Traes_1AS_E6058767A.1`), `TGACv1_result` (TGACv1, e.g. `TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1`), `IWGSCv1_result` (IWGSCv1.0, e.g. `TraesCS6B01G342500.1`). Response includes `code` (mapping class) and `length` fields.
 - `GET /api/synteny/search?ID=&table=` — Search syntenic blocks. Input: genomic interval or gene ID.
 
-### Literature
-- `GET /api/literature/search?keyword=&tag=&page=&page_size=` — Search wheat literature indexed in the database.
-- `GET /api/literature/tags` — Get popular literature tags.
 
 ### Triticeae Papers (文献检索)
-- `GET /api/triticeae/papers?gene_name=&trait_label=&evidence_type=&min_confidence=&ai_tags=&functional_gene_tags=&q=&pub_date_start=&pub_date_end=&limit=&offset=` — Search Triticeae research papers with multi-dimensional filters (gene name, trait, evidence, confidence, AI tags, keywords, date range).
+- `GET /api/triticeae/papers` — Search Triticeae research papers with filters: `q` (full-text), `gene_name`, `trait_label`, `evidence_type`, `min_confidence`, `review_status`, `ai_tags`, `functional_gene_tags`, `pubmed_keywords`, `new_tags`, `gene_type`, `source_method`, `is_functional_gene`, `functional_gene_flag`, `functional_gene_source`, `function_gene_flag`, `function_gene_tags`, `pub_date_start`, `pub_date_end`, `limit`, `offset`.
 - `GET /api/triticeae/papers/{pubmedid}` — Get paper details by PubMed ID.
 
 ### Tasks (async POST)

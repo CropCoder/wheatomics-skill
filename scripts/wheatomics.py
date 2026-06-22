@@ -89,10 +89,7 @@ ENDPOINTS = {
         ("GET", "blast/status", "Check BLAST environment status"),
         ("POST", "blast/search", "Submit BLAST search (blastp/blastn)"),
     ],
-    "Literature": [
-        ("GET", "literature/search", "Search literature"),
-        ("GET", "literature/tags", "Popular literature tags"),
-    ],
+
     "Triticeae Papers": [
         ("GET", "triticeae/papers", "Search Triticeae research papers with filters"),
         ("GET", "triticeae/papers/{pubmedid}", "Get paper details by PubMed ID"),
@@ -117,10 +114,7 @@ ENDPOINTS = {
         ("GET", "PrimerServer2/jobs/{job_id}/specificity/{filename}", "Get specificity file"),
         ("POST", "PrimerServer2/jobs/cleanup", "Cleanup old jobs"),
     ],
-    "Literature": [
-        ("GET", "literature/search", "Search literature"),
-        ("GET", "literature/tags", "Popular literature tags"),
-    ],
+
 }
 
 
