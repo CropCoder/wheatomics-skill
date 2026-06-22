@@ -216,18 +216,20 @@ curl -X GET "http://localhost:8000/api/homologs/wheat-rice-arabidopsis?gene_id=T
 
 **Convert Gene Ids**
 
-Convert between IWGSC annotation versions and external resources.
-Input transcript IDs must include the `.1` suffix.
+Convert external gene IDs to IWGSC v1.1 (02G) format.
+Input transcript IDs must include the `.1` suffix, space-separated (max 100).
 
-Three external source databases can be converted to IWGSC v1.1 (02G):
+Available source databases (`gene_version`):
 - `MIPS_result` — MIPSv2.2, e.g. `Traes_1AS_E6058767A.1`
 - `TGACv1_result` — TGACv1, e.g. `TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1`
 - `IWGSCv1_result` — IWGSCv1.0, e.g. `TraesCS6B01G342500.1`
 
+Response fields: `query_gene` (input), `reference_gene` (IWGSCv1.1), `code` (mapping relationship class), `length`.
+
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `ID` | string | Yes | - | Space-separated gene IDs (with .1 suffix) |
-| `gene_version` | string | Yes | - | Target version (v1/v2/v3 or source DB name) |
+| `ID` | string | Yes | - | Space-separated gene IDs (with .1 suffix, max 100) |
+| `gene_version` | string | Yes | - | Source table: MIPS_result / TGACv1_result / IWGSCv1_result |
 
 **Example:**
 ```bash

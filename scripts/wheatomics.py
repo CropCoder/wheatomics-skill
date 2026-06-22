@@ -81,7 +81,7 @@ ENDPOINTS = {
     "Comparative": [
         ("GET", "homologs/triticeae", "Triticeae homologs"),
         ("GET", "homologs/wheat-rice-arabidopsis", "Wheat-rice-Arabidopsis orthologs"),
-        ("GET", "id-conversion", "Convert gene ID versions"),
+        ("GET", "id-conversion", "Convert external gene IDs to IWGSC v1.1 (02G)"),
         ("GET", "synteny/search", "Search syntenic blocks"),
     ],
         "BLAST": [
