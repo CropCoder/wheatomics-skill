@@ -25,7 +25,10 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/genes/detail/{gene_id}` — Gene detail: description, chromosome, protein length, MW, pI, annotations, JBrowse/Ensembl links. Supports IWGSC v1/v2/v3.
 - `GET /api/genes/functions/pfam?ID=&table=` — PfamSearch: search genes by PFAM domain ID (e.g., `PF00319`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
 - `GET /api/genes/functions/interval?ID=&table=` — IntervalTool: search genes by chromosome interval (e.g., `chr5A:587000000..587200000`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
-- `GET /api/genes/known/search?gene_id=` — Search known/characterized genes with phenotypes and references.
+- `GET /api/genes/functions/tables` — List available gene function database tables and their descriptions.
+- `GET /api/genes/known/search?searchid=` — Search known/characterized genes with phenotypes and references.
+- `GET /api/genes/known/all` — List all known/characterized genes.
+- `GET /api/genes/known/by-chromosome/{chromosome}` — List known genes on a specific chromosome (e.g., `5A`, `chr5A`).
 - `GET /api/genes/known/{gene_id}` — Get a specific known gene by clone ID or gene ID.
 
 ### Expression
@@ -38,7 +41,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/ppi/query?gene_ids=&table=&min_score=` — wheatPPI: 查询蛋白互作（CF-MS 评分）。仅支持中国春 02G 转录本 ID（需加 `.1` 后缀），不支持 eggNOG ID。评分阈值: 0.5（高置信）/ 0.2（中等）/ 0（全部）。
 
 ### Sequences
-- `GET /api/sequence/by-gene?gene_id=&gene_db=&protein_db=` — Fetch CDS and protein FASTA for a gene.
+- `GET /api/sequence/by-gene?searchid=&gene_db=&protein_db=` — Fetch CDS and protein FASTA for a gene.
 - `GET /api/sequence/batch?ID=&database=` — Batch FASTA retrieval for multiple genes (space-separated).
 - `GET /api/sequence/by-interval?region=&database=` — Extract genomic DNA from a chromosome interval (max 5 Mb). Region format: `chr{Chromosome}_{Variety}:{start}-{end}` (e.g., `chr1A_Fielder:587123000-587124000`).
 - `GET /api/preblast?ID=&blastp_species=` — Get precomputed BLAST results for a gene against a species.
@@ -61,8 +64,8 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 ### Comparative Genomics
 
 ### Comparative Genomics
-- `GET /api/homologs/triticeae?gene_id=&type=` — Find homologs across Triticeae species (Chinese Spring, durum, wild emmer, etc.).
-- `GET /api/homologs/wheat-rice-arabidopsis?gene_id=` — Wheat-rice-Arabidopsis ortholog triplets.
+- `GET /api/homologs/triticeae?searchid=&type=` — Find homologs across Triticeae species (Chinese Spring, durum, wild emmer, etc.).
+- `GET /api/homologs/wheat-rice-arabidopsis?searchid=` — Wheat-rice-Arabidopsis ortholog triplets.
 - `GET /api/id-conversion?ID=&gene_version=` — Convert external gene IDs to IWGSC v1.1 (02G) format. Input: transcript IDs with `.1` suffix, newline-separated (%0D%0A). `gene_version` values: `MIPS_result` (MIPSv2.2, e.g. `Traes_1AS_E6058767A.1`), `TGACv1_result` (TGACv1, e.g. `TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1`), `IWGSCv1_result` (IWGSCv1.0, e.g. `TraesCS6B01G342500.1`). Response includes `code` (mapping class) and `length` fields.
 - `GET /api/synteny/search?ID=&table=` — Search syntenic blocks. Input: genomic interval or gene ID.
 
