@@ -50,7 +50,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/blast/databases?program=` — List available BLAST databases. Response includes `protein`, `nucleotide`, `total`, and `categories` (by species/type). `program`: `blastp` / `blastn` / `blastx` / `tblastn` / `tblastx` / 留空=全部。
 - `GET /api/blast/status` — Check BLAST environment: blastp/blastn/blastx/tblastn/tblastx + blastdbcmd versions.
 - `GET /api/preblast?ID=&blastp_species=` — Get precomputed BLAST results for a gene against a species.
-- `GET /api/blastp?gene=&limit=&offset=` — Search precomputed BLASTP results (identity, evalue, bit score, alignment). Defaults: `limit`=5000, `offset`=0.
+- `GET /api/blastp?gene=&limit=&offset=` — Search precomputed BLASTP results (identity, evalue, bit score, alignment). 可用于搜索 query 基因在小麦族里的目标基因，做同源基因搜索或不同基因组版本/不同材料之间的基因 ID 转换。Defaults: `limit`=5000, `offset`=0.
 - `POST /api/blast/search` — Submit a BLAST search. Request body (form-urlencoded):
 
   | 参数 | 类型 | 必填 | 默认 | 说明 |
