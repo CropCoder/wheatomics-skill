@@ -78,7 +78,6 @@ ENDPOINTS = {
         ("GET", "sequence/by-gene", "Get CDS+protein FASTA by gene"),
         ("GET", "sequence/batch", "Batch FASTA (space-separated IDs)"),
         ("GET", "sequence/by-interval", "基因组区间序列"),
-        ("GET", "preblast", "Precomputed BLAST results"),
         ("GET", "novabrowse", "Novabrowse genome browser"),
     ],
     "Comparative": [
@@ -90,7 +89,9 @@ ENDPOINTS = {
         "BLAST": [
         ("GET", "blast/databases", "List available BLAST databases"),
         ("GET", "blast/status", "Check BLAST environment status"),
-        ("POST", "blast/search", "Submit BLAST search (blastp/blastn)"),
+        ("GET", "blast/search", "Submit BLAST search (blastp/blastn)"),
+        ("GET", "preblast", "Precomputed BLAST results by species"),
+        ("GET", "blastp", "Search precomputed BLASTP results (paginated)"),
     ],
 
     "Triticeae Papers": [

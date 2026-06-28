@@ -41,15 +41,16 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/ppi/query?gene_ids=&table=&min_score=` — wheatPPI: 查询蛋白互作（CF-MS 评分）。仅支持中国春 02G 转录本 ID（需加 `.1` 后缀），不支持 eggNOG ID。评分阈值: 0.5（高置信）/ 0.2（中等）/ 0（全部）。
 
 ### Sequences
-- `GET /api/sequence/by-gene?searchid=&gene_db=&protein_db=` — Fetch CDS and protein FASTA for a gene.
+- `GET /api/sequence/by-gene?gene_id=&gene_db=&protein_db=` — Fetch CDS and protein FASTA for a gene.
 - `GET /api/sequence/batch?ID=&database=` — Batch FASTA retrieval for multiple genes (space-separated).
 - `GET /api/sequence/by-interval?region=&database=` — Extract genomic DNA from a chromosome interval (max 5 Mb). Region format: `chr{Chromosome}_{Variety}:{start}-{end}` (e.g., `chr1A_Fielder:587123000-587124000`).
-- `GET /api/preblast?ID=&blastp_species=` — Get precomputed BLAST results for a gene against a species.
 - `GET /api/novabrowse?id=` — Run Novabrowse for genome browser visualization.
 
 ### BLAST (在线比对)
 - `GET /api/blast/databases?program=` — List available BLAST databases. Response includes `protein`, `nucleotide`, `total`, and `categories` (by species/type). `program`: `blastp` / `blastn` / `blastx` / `tblastn` / `tblastx` / 留空=全部。
 - `GET /api/blast/status` — Check BLAST environment: blastp/blastn/blastx/tblastn/tblastx + blastdbcmd versions.
+- `GET /api/preblast?ID=&blastp_species=` — Get precomputed BLAST results for a gene against a species.
+- `GET /api/blastp?gene=&limit=&offset=` — Search precomputed BLASTP results (identity, evalue, bit score, alignment). Defaults: `limit`=5000, `offset`=0.
 - `POST /api/blast/search` — Submit a BLAST search. Request body (form-urlencoded):
 
   | 参数 | 类型 | 必填 | 默认 | 说明 |
