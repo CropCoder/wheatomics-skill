@@ -245,53 +245,6 @@ curl -X GET "http://localhost:8000/api/novabrowse?chrom=chr5A&start=587000000&en
 ```
 
 
-### GET /api/ida/tables
-
-**Tags:** Ida
-
-**List ID conversion database tables**
-
-List available ID conversion database tables.
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| None | — | — | — | No parameters |
-
-**Example:**
-```bash
-curl -X GET "https://wheatomics.sdau.edu.cn/api/ida/tables"
-```
-
-Response returns available tables with their source identifiers.
-
----
-
-### GET /api/ida/convert
-
-**Tags:** Ida
-
-**Convert Gene IDs**
-
-Convert external gene IDs to IWGSC v1.1 (02G) format.
-Same functionality as `GET /api/id-conversion`.
-
-Available source databases (`gene_version`):
-- `MIPS_result` — MIPSv2.2
-- `TGACv1_result` — TGACv1
-- `IWGSCv1_result` — IWGSCv1.0
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `ID` | string | Yes | — | Gene IDs (with .1 suffix); multiple IDs separated by %0D%0A |
-| `gene_version` | string | Yes | — | Source table: MIPS_result / TGACv1_result / IWGSCv1_result |
-
-**Example:**
-```bash
-curl -X GET "https://wheatomics.sdau.edu.cn/api/ida/tables"
-```
-
----
-
 
 
 ### GET /api/ppi/query
