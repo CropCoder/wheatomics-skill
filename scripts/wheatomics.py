@@ -82,6 +82,10 @@ ENDPOINTS = {
         ("GET", "sequence/by-interval", "基因组区间序列"),
         ("GET", "novabrowse", "Novabrowse genome browser"),
     ],
+    "OrthoFinder": [
+        ("GET", "orthofinder/search", "Search orthogroups by gene/OG ID"),
+        ("GET", "orthofinder/download", "Download orthogroup tree or MSA"),
+    ],
     "Comparative": [
         ("GET", "homologs/wheat-rice-arabidopsis", "Wheat-rice-Arabidopsis orthologs"),
         ("GET", "id-conversion", "Convert external gene IDs to IWGSC v1.1 (02G)"),

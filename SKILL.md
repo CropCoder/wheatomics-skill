@@ -63,12 +63,13 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
   > 响应说明：结果无 `hits` 字段，需下载文件查看。始终同时生成 `.tsv`(outfmt 6, 制表符分隔, 易解析) 和 `.txt`(outfmt 0, 含比对信息, 易阅读) 两种格式，下载链接在 `download_url` 数组中，`outfmt` 字段标识已生成的格式。
 
 ### Comparative Genomics
-
-### Comparative Genomics
 - `GET /api/homologs/wheat-rice-arabidopsis?gene_id=` — Wheat-rice-Arabidopsis ortholog triplets.
 - `GET /api/id-conversion?ID=&gene_version=` — Convert external gene IDs to IWGSC v1.1 (02G) format. Input: transcript IDs with `.1` suffix, newline-separated (%0D%0A). `gene_version` values: `MIPS_result` (MIPSv2.2, e.g. `Traes_1AS_E6058767A.1`), `TGACv1_result` (TGACv1, e.g. `TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1`), `IWGSCv1_result` (IWGSCv1.0, e.g. `TraesCS6B01G342500.1`). Response: `records` with `query_id`, `reference_id`, `quality`(映射关系), `source`, `length`; `summary`(total/mapped/not_found); `version`标识源库。
 - `GET /api/synteny/search?ID=&table=` — Search syntenic blocks. Input: genomic interval or gene ID.
 
+### OrthoFinder (直系同源搜索)
+- `GET /api/orthofinder/search?q=` — Search OrthoFinder orthogroups by protein/gene ID or orthogroup ID (OG000xxxx). Returns orthogroup members, gene tree (Newick), and MSA.
+- `GET /api/orthofinder/download?og=&type=` — Download orthogroup gene tree (Newick) or MSA (FASTA). `type` values: `tree` / `alignment`.
 
 ### Triticeae Papers (文献检索)
 - `GET /api/triticeae/papers` — Search Triticeae research papers with filters: `q` (full-text), `gene_name`, `trait_label`, `evidence_type`, `min_confidence`, `review_status`, `ai_tags`, `functional_gene_tags`, `pubmed_keywords`, `new_tags`, `gene_type`, `source_method`, `is_functional_gene`, `functional_gene_flag`, `functional_gene_source`, `function_gene_flag`, `function_gene_tags`, `pub_date_start`, `pub_date_end`, `limit`, `offset`.

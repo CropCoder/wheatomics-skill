@@ -342,6 +342,56 @@ curl -X GET "http://localhost:8000/api/synteny/search?ID=TraesCS5A02G391700"
 ---
 
 
+
+### GET /api/orthofinder/search
+
+**Tags:** OrthoFinder
+
+**Search by protein ID or orthogroup ID**
+
+Search for a protein/gene ID or orthogroup ID and return orthogroup details.
+
+If the query matches an orthogroup ID (OG000xxxx), look it up directly.
+Otherwise, query the protein/gene ID to find its orthogroup.
+Returns orthogroup members, gene tree (Newick), and multiple sequence alignment.
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `q` | string | Yes | - | Protein/gene ID or orthogroup ID (OG000xxxx) |
+
+**Example:**
+```bash
+curl -X GET "http://localhost:8000/api/orthofinder/search?q=TraesCS1A03G0053300.1"
+```
+
+---
+
+### GET /api/orthofinder/download
+
+**Tags:** OrthoFinder
+
+**Download tree or alignment file**
+
+Download the orthogroup gene tree (Newick text format) or multiple sequence
+alignment (FASTA format) file for a given orthogroup.
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `og` | string | Yes | - | OrthoFinder OG ID, e.g. OG0001897 |
+| `type` | string | Yes | - | File type: `tree` or `alignment` |
+
+**Example:**
+```bash
+# Download gene tree
+curl -X GET "http://localhost:8000/api/orthofinder/download?og=OG0001897&type=tree"
+
+# Download MSA
+curl -X GET "http://localhost:8000/api/orthofinder/download?og=OG0001897&type=alignment"
+```
+
+---
+
+
 ### GET /api/PrimerServer2/config
 
 **Get Config Endpoint**
