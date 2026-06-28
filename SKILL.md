@@ -40,14 +40,13 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 
 ### Sequences
 - `GET /api/sequence/by-gene?gene_id=&gene_db=&protein_db=` — Fetch CDS and protein FASTA for a gene.
-- `GET /api/sequence/batch?ID=&database=` — Batch FASTA retrieval for multiple genes (space-separated).
+- `GET /api/sequence/batch?ID=&database=` — Batch FASTA retrieval for multiple genes. 多基因用空格或换行分隔（URL 中 `+` 对应空格，`%0D%0A` 对应换行）。Gene ID 支持带或不带 `.1`（API 自动添加）。Common `database` values: `all_gene`(所有基因CDS), `all_protein`(所有蛋白), `all_genomes`(所有基因组). 完整列表见 `GET /api/blast/databases`.
 - `GET /api/sequence/by-interval?region=&database=` — Extract genomic DNA from a chromosome interval (max 5 Mb). Region format: `chr{Chromosome}_{Variety}:{start}-{end}` (e.g., `chr1A_Fielder:587123000-587124000`).
 - `GET /api/novabrowse?id=` — Run Novabrowse for genome browser visualization.
 
 ### BLAST (在线比对)
 - `GET /api/blast/databases?program=` — List available BLAST databases. Response includes `protein`, `nucleotide`, `total`, and `categories` (by species/type). `program`: `blastp` / `blastn` / `blastx` / `tblastn` / `tblastx` / 留空=全部。
 - `GET /api/blast/status` — Check BLAST environment: blastp/blastn/blastx/tblastn/tblastx + blastdbcmd versions.
-- `GET /api/preblast?ID=&blastp_species=` — Get precomputed BLAST results for a gene against a species.
 - `GET /api/blastp?gene=&limit=&offset=` — Search precomputed BLASTP results (identity, evalue, bit score, alignment). 可用于搜索 query 基因在小麦族里的目标基因，做同源基因搜索或不同基因组版本/不同材料之间的基因 ID 转换。Defaults: `limit`=5000, `offset`=0.
 - `POST /api/blast/search` — Submit a BLAST search. Request body (form-urlencoded):
 
@@ -63,10 +62,9 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 ### Comparative Genomics
 
 ### Comparative Genomics
-- `GET /api/homologs/triticeae?searchid=&type=` — Find homologs across Triticeae species (Chinese Spring, durum, wild emmer, etc.).
-- `GET /api/homologs/wheat-rice-arabidopsis?searchid=` — Wheat-rice-Arabidopsis ortholog triplets.
+- `GET /api/homologs/triticeae?gene_id=&type=` — Find homologs across Triticeae species (Chinese Spring, durum, wild emmer, etc.).
+- `GET /api/homologs/wheat-rice-arabidopsis?gene_id=` — Wheat-rice-Arabidopsis ortholog triplets.
 - `GET /api/id-conversion?ID=&gene_version=` — Convert external gene IDs to IWGSC v1.1 (02G) format. Input: transcript IDs with `.1` suffix, newline-separated (%0D%0A). `gene_version` values: `MIPS_result` (MIPSv2.2, e.g. `Traes_1AS_E6058767A.1`), `TGACv1_result` (TGACv1, e.g. `TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1`), `IWGSCv1_result` (IWGSCv1.0, e.g. `TraesCS6B01G342500.1`). Response: `records` with `query_id`, `reference_id`, `quality`(映射关系), `source`, `length`; `summary`(total/mapped/not_found); `version`标识源库。
-- `GET /api/ida/tables` — List available ID conversion database tables (MIPS_result, TGACv1_result, IWGSCv1_result).
 - `GET /api/synteny/search?ID=&table=` — Search syntenic blocks. Input: genomic interval or gene ID.
 
 
@@ -128,7 +126,7 @@ Use `id-conversion` to convert between versions.
 ## Important constraints
 
 - Sequence by interval: max 5,000,000 bp range.
-- Batch sequence uses **spaces** (not commas) between gene IDs.
+- Batch sequence uses **spaces** or **newlines** between gene IDs.
 - All other multi-gene endpoints use **commas**.
 - `sequence/by-gene` and `sequence/batch` auto-append `.1` suffix if absent.
 - `expression/query` 支持 v1/v2/v3 基因 ID（API 自动将 01G/03G 转换为 02G 后查询，转换记录在 `genes_converted` 响应字段中）。

@@ -21,6 +21,9 @@ Examples:
   # 按蛋白 ID 取序列
   python3 wheatomics.py sequence/by-gene gene_id=TraesCS7A03G1158600 protein_db=all_protein
 
+  # Batch FASTA（空格分隔 ID，带 .1 后缀）
+  python3 wheatomics.py sequence/batch 'ID=TraesCS5A02G391700.1 TraesCS5A02G123400.1' database=all_gene
+
 
 
   # BLAST: 查看可用数据库
