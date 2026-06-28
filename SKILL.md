@@ -27,13 +27,11 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/genes/functions/interval?ID=&table=` — IntervalTool: search genes by chromosome interval (e.g., `chr5A:587000000..587200000`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
 - `GET /api/genes/functions/tables` — List available gene function database tables and their descriptions.
 - `GET /api/genes/known/search?searchid=` — Search known/characterized genes with phenotypes and references.
-- `GET /api/genes/known/all` — List all known/characterized genes.
-- `GET /api/genes/known/by-chromosome/{chromosome}` — List known genes on a specific chromosome (e.g., `5A`, `chr5A`).
 - `GET /api/genes/known/{gene_id}` — Get a specific known gene by clone ID or gene ID.
 
 ### Expression
 - `GET /api/expression/projects` — List all expression projects grouped by category (Tissue, Abiotic, Biotic, Development).
-- `GET /api/expression/query?gene_ids=&project=` — Query expression values with SD error bars for genes in a project. 支持 v1/v2/v3 输入（API 自动将 01G/03G 转换为 02G 后查询）。
+- `GET /api/expression/query?gene_ids=&project=` — Query expression values with SD error bars for genes in a project. `project` 需从 `/api/expression/projects` 获取真实表名（如 `PRJEB5314_paired_tbl`）。支持 v1/v2/v3 输入（API 自动将 01G/03G 转换为 02G 后查询）。
 
 ### Networks (Coexpression & PPI)
 - `GET /api/coexpression/databases` — List available coexpression databases.
