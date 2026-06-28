@@ -62,6 +62,7 @@ ENDPOINTS = {
         ("GET", "genes/functions/interval", "IntervalTool: search genes by chromosome interval"),
         ("GET", "genes/functions/tables", "List available gene function tables"),
         ("GET", "genes/functions/examples", "List genome examples for Interval Tool"),
+        ("GET", "genes/functions/registry", "List registered genome/function tables with metadata"),
         ("GET", "genes/known/search", "Search known genes"),
         ("GET", "genes/known/all", "List all known genes"),
         ("GET", "genes/known/by-chromosome/{chromosome}", "List known genes by chromosome"),

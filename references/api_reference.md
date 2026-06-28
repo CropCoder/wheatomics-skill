@@ -343,6 +343,29 @@ curl -X GET "http://localhost:8000/api/synteny/search?ID=TraesCS5A02G391700"
 
 
 
+
+### GET /api/genes/functions/registry
+
+**Tags:** IntervalTool
+
+**List registered genome/function tables**
+
+Returns information about all registered genome/function tables.
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| None | — | — | — | No parameters |
+
+**Example:**
+```bash
+curl -X GET "http://localhost:8000/api/genes/functions/registry"
+```
+
+Response includes: `table_name`, `NameGroup`, `Polyploidy`, `chromosome_level`, `DOI`, `title`, `Abstract`, `example_chr_ID`, `example_gene_id`.
+
+---
+
+
 ### GET /api/orthofinder/search
 
 **Tags:** OrthoFinder
