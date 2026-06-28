@@ -219,7 +219,7 @@ Response fields: `query_gene` (input), `reference_gene` (IWGSCv1.1), `code` (map
 curl -X GET "https://wheatomics.sdau.edu.cn/api/id-conversion?ID=Traes_1AS_E6058767A.1&gene_version=MIPS_result"
 
 # TGACv1 -> IWGSC v1.1 (02G), multiple genes (newline-separated)
-curl -X GET "https://wheatomics.sdau.edu.cn/api/id-conversion?ID=TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1%0D%0ATRIAE_CS42_6BL_TGACv1_123456_AA1620000.1&gene_version=TGACv1_result"
+curl -X GET "https://wheatomics.sdau.edu.cn/api/id-conversion?ID=TRIAE_CS42_6BL_TGACv1_501926_AA1621570.1%0D%0ATRIAE_CS42_6BL_TGACv1_501927_AA1621571.1&gene_version=TGACv1_result"
 
 # IWGSCv1.0 -> IWGSC v1.1 (02G)
 curl -X GET "http://localhost:8000/api/id-conversion?ID=TraesCS6B01G342500.1&gene_version=v2"
