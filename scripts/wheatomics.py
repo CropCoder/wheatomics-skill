@@ -22,8 +22,6 @@ Examples:
   python3 wheatomics.py sequence/by-gene gene_id=TraesCS7A03G1158600 protein_db=all_protein
 
 
-  # POST with JSON body
-  python3 wheatomics.py tasks/primer-design --data @payload.json
 
   # BLAST: 查看可用数据库
   python3 wheatomics.py blast/databases
@@ -97,10 +95,6 @@ ENDPOINTS = {
         ("GET", "triticeae/papers/{pubmedid}", "Get paper details by PubMed ID"),
     ],
     "Tasks": [
-        ("POST", "tasks/primer-design", "Design SNP primers (CAPS/KASP)"),
-        ("GET", "tasks/primer-databases", "List primer reference databases"),
-        ("POST", "tasks/primer-check", "Check primer specificity"),
-        ("GET", "tasks/primer-result/{job_id}", "Get primer result"),
     ],
     "PrimerServer2": [
         ("GET", "PrimerServer2/databases", "List PCR primer databases"),
@@ -174,7 +168,7 @@ def request(method, path, params=None, json_body=None):
         req = urllib.request.Request(url, data=data, method=method)
         req.add_header("Content-Type", "application/x-www-form-urlencoded")
     elif json_body is not None:
-        # JSON body POST (e.g., tasks/primer-design)
+        # JSON body POST (e.g., PrimerServer2 jobs)
         data = json.dumps(json_body).encode("utf-8")
         req = urllib.request.Request(url, data=data, method=method)
         req.add_header("Content-Type", "application/json")

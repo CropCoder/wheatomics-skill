@@ -75,10 +75,6 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/triticeae/papers/{pubmedid}` — Get paper details by PubMed ID.
 
 ### Tasks (async POST)
-- `POST /api/tasks/primer-design` — Submit a primer design job (CAPS/KASP). See reference for request schema.
-- `GET /api/tasks/primer-databases?category=` — List available primer reference databases (all/genome/gene).
-- `POST /api/tasks/primer-check` — Check primer specificity against reference genomes.
-- `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.
 ### PrimerServer2 (PCR批量引物设计)
 
 
@@ -165,7 +161,6 @@ python3 scripts/wheatomics.py blast/search database=Fielder_protein query='>seq\
 python3 scripts/wheatomics.py blast/status
 
 # POST request with JSON body file
-python3 scripts/wheatomics.py tasks/primer-design --data @payload.json
 
 # List endpoints
 python3 scripts/wheatomics.py --list
@@ -174,8 +169,3 @@ python3 scripts/wheatomics.py --list
 ## Reference
 
 See `references/api_reference.md` for complete endpoint schemas with all parameters, types, defaults, and example responses.
-
-- `POST /api/tasks/primer-design` — Submit a primer design job (CAPS/KASP). See reference for request schema.
-- `GET /api/tasks/primer-databases?category=` — List available primer reference databases (all/genome/gene).
-- `POST /api/tasks/primer-check` — Check primer specificity against reference genomes.
-- `GET /api/tasks/primer-result/{job_id}` — Get primer design/check job result files.

@@ -424,26 +424,7 @@ curl -X GET "http://localhost:8000/api/synteny/search?ID=TraesCS5A02G391700"
 
 ---
 
-### POST /api/tasks/primer-design
 
-**Tags:** Tasks
-
-**Design Primers**
-
-**Request Body (JSON):**
-```json
-// Schema: PrimerDesignRequest — see schemas section below
-{
-  "$ref": "#/components/schemas/PrimerDesignRequest"
-}
-```
-
-**Example:**
-```bash
-curl -X POST "http://localhost:8000/api/tasks/primer-design" \
-```
-
----
 ### GET /api/PrimerServer2/config
 
 **Get Config Endpoint**
@@ -713,66 +694,6 @@ curl -X POST "http://localhost:8000/api/tasks/primer-design" \
 }
 ```
 
-### PrimerDesignRequest
-
-```json
-{
-  "properties": {
-    "querydb": {
-      "type": "string",
-      "title": "Querydb"
-    },
-    "ploidy": {
-      "type": "string",
-      "title": "Ploidy"
-    },
-    "price": {
-      "type": "string",
-      "title": "Price"
-    },
-    "caps": {
-      "type": "boolean",
-      "title": "Caps",
-      "default": true
-    },
-    "kasp": {
-      "type": "boolean",
-      "title": "Kasp",
-      "default": true
-    },
-    "tm": {
-      "type": "string",
-      "title": "Tm"
-    },
-    "size": {
-      "type": "string",
-      "title": "Size"
-    },
-    "pick": {
-      "type": "string",
-      "title": "Pick"
-    },
-    "markers": {
-      "items": {
-        "type": "string"
-      },
-      "type": "array",
-      "title": "Markers"
-    }
-  },
-  "type": "object",
-  "required": [
-    "querydb",
-    "ploidy",
-    "price",
-    "tm",
-    "size",
-    "pick"
-  ],
-  "title": "PrimerDesignRequest",
-  "description": "Request body for legacy SNP primer workflow."
-}
-```
 
 ### SequenceBundle
 
