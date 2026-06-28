@@ -174,24 +174,6 @@ curl -X GET "http://localhost:8000/api/health"
 
 ---
 
-### GET /api/homologs/triticeae
-
-**Tags:** Comparative
-
-**Triticeae Homologs**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `gene_id` | string | Yes | - |  |
-| `max_targets` | integer, default: 1 | No | 1 |  |
-
-**Example:**
-```bash
-curl -X GET "http://localhost:8000/api/homologs/triticeae?gene_id=TraesCS5A02G391700&max_targets=2"
-```
-
----
-
 ### GET /api/homologs/wheat-rice-arabidopsis
 
 **Tags:** Comparative
@@ -329,24 +311,6 @@ curl -X GET "https://wheatomics.sdau.edu.cn/api/ida/tables"
 # 转录本 ID 需加 .1 后缀，不支持 eggNOG ID
 # CF-MS 评分阈值: 0.5（高置信）/ 0.2（中等）/ 0（全部）
 curl -X GET "https://wheatomics.sdau.edu.cn/api/ppi/query?gene_ids=TraesCS6D02G084800.1&min_score=0.5"
-```
-
----
-
-### GET /api/preblast
-
-**Tags:** Sequences
-
-**Get Preblast Result**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `ID` | string | Yes | - |  |
-| `blastp_species` | string | Yes | - |  |
-
-**Example:**
-```bash
-curl -X GET "http://localhost:8000/api/preblast?ID=TraesCS5A02G391700&blastp_species=rice"
 ```
 
 ---

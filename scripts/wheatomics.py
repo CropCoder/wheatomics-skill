@@ -83,7 +83,6 @@ ENDPOINTS = {
         ("GET", "novabrowse", "Novabrowse genome browser"),
     ],
     "Comparative": [
-        ("GET", "homologs/triticeae", "Triticeae homologs"),
         ("GET", "homologs/wheat-rice-arabidopsis", "Wheat-rice-Arabidopsis orthologs"),
         ("GET", "id-conversion", "Convert external gene IDs to IWGSC v1.1 (02G)"),
         ("GET", "synteny/search", "Search syntenic blocks"),
@@ -92,7 +91,6 @@ ENDPOINTS = {
         ("GET", "blast/databases", "List available BLAST databases"),
         ("GET", "blast/status", "Check BLAST environment status"),
         ("GET", "blast/search", "Submit BLAST search (blastp/blastn)"),
-        ("GET", "preblast", "Precomputed BLAST results by species"),
         ("GET", "blastp", "Search precomputed BLASTP results (paginated)"),
     ],
 
