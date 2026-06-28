@@ -74,7 +74,7 @@ curl -X GET "http://localhost:8000/api/expression/projects"
 
 **Example:**
 ```bash
-curl -X GET "http://localhost:8000/api/expression/query?gene_ids=TraesCS5A02G391700,TraesCS5A02G123456&project=PRJEB5314_paired_tbl"
+curl -X GET "http://localhost:8000/api/expression/query?gene_ids=TraesCS5A02G391700,TraesCS5A02G391700.1&project=PRJEB5314_paired_tbl"
 ```
 
 ---
@@ -364,7 +364,7 @@ curl -X GET "http://localhost:8000/api/preblast?ID=TraesCS5A02G391700&blastp_spe
 
 **Example:**
 ```bash
-curl -X GET "http://localhost:8000/api/sequence/batch?ID=TraesCS5A02G391700+TraesCS5A02G123456&database=all_gene"
+curl -X GET "http://localhost:8000/api/sequence/batch?ID=TraesCS5A02G391700+TraesCS5A02G391700.1&database=all_gene"
 ```
 
 ---
