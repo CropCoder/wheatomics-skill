@@ -374,6 +374,7 @@ Response includes: `table_name`, `NameGroup`, `Polyploidy`, `chromosome_level`, 
 
 Search for a protein/gene ID or orthogroup ID and return orthogroup details.
 
+Input supports 01G/02G/03G transcript IDs with {bt}.1{bt}, {bt}.2{bt} suffixes.
 If the query matches an orthogroup ID (OG000xxxx), look it up directly.
 Otherwise, query the protein/gene ID to find its orthogroup.
 Returns orthogroup members, gene tree (Newick), and multiple sequence alignment.

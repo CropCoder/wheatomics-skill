@@ -69,7 +69,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/synteny/search?ID=&table=` — Search syntenic blocks. Input: genomic interval or gene ID.
 
 ### OrthoFinder (直系同源搜索)
-- `GET /api/orthofinder/search?q=` — Search OrthoFinder orthogroups by protein/gene ID or orthogroup ID (OG000xxxx). Returns orthogroup members, gene tree (Newick), and MSA.
+- `GET /api/orthofinder/search?q=` — Search OrthoFinder orthogroups by protein/gene ID or orthogroup ID (OG000xxxx). 输入支持 01G/02G/03G 转录本 ID（需带 `.1`、`.2` 后缀）。Returns orthogroup members, gene tree (Newick), and MSA.
 - `GET /api/orthofinder/download?og=&type=` — Download orthogroup gene tree (Newick) or MSA (FASTA). `type` values: `tree` / `alignment`.
 
 ### Triticeae Papers (文献检索)
