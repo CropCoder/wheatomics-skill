@@ -445,10 +445,32 @@ curl -X GET "http://localhost:8000/api/synteny/search?ID=TraesCS5A02G391700"
 
 **Create Job**
 
+**Request Body:** DesignJobRequest (application/json)
+
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-
-**Request Body:** DesignJobRequest (application/json)
+| `app-type` | string | **Yes** | `"design"` |
+| `selectTemplate` | string | **Yes** | 模板数据库名（如 `"primer_Chinese_Spring2.1.genome"`）或 `"custom"` |
+| `template-regions` | string | No | 模板区域，每行一个：`TemplateID TargetPos TargetLength [ProductSizeMin] [ProductSizeMax]`。`selectTemplate` 非 custom 时必填 |
+| `custom-template-sequences` | string | No | 自定义模板 FASTA 序列。`selectTemplate` 为 custom 时必填 |
+| `region_type` | string | No | 区域类型：`SEQUENCE_TARGET`（区域内设计）/ `SEQUENCE_INCLUDED_REGION`（扩增全长）/ `FORCE_END`（强制 3' 端）。默认 `SEQUENCE_TARGET` |
+| `product_size_min` | int | No | 最小产物大小 (bp)，默认 100 |
+| `product_size_max` | int | No | 最大产物大小 (bp)，默认 1000 |
+| `selected-databases` | array | No | 特异性检测的数据库列表，默认 `["primer_Chinese_Spring2.1.genome"]` |
+| `size_start` | int | No | 特异性检测最小扩增子大小 (bp)，默认 50 |
+| `size_stop` | int | No | 特异性检测最大扩增子大小 (bp)，默认 5000 |
+| `PRIMER_NUM_RETURN` | int | No | Primer3 每个位点设计的候选引物对数，默认 30 |
+| `PRIMER_MIN_SIZE` | int | No | 最小引物长度 (bp)，默认 18 |
+| `PRIMER_OPT_SIZE` | int | No | 最佳引物长度 (bp)，默认 20 |
+| `PRIMER_MAX_SIZE` | int | No | 最大引物长度 (bp)，默认 23 |
+| `PRIMER_MIN_TM` | float | No | 最小退火温度 (°C)，默认 57 |
+| `PRIMER_OPT_TM` | float | No | 最佳退火温度 (°C)，默认 60 |
+| `PRIMER_MAX_TM` | float | No | 最大退火温度 (°C)，默认 63 |
+| `PRIMER_MIN_GC` | float | No | 最小 GC 含量 (%)，默认 35.0 |
+| `PRIMER_MAX_GC` | float | No | 最大 GC 含量 (%)，默认 65.0 |
+| `blast_e_value` | int | No | BLAST E-value 阈值，默认 30000 |
+| `blast_identity` | int | No | BLAST 比对最低相似度 (%)，默认 60 |
+| `blast_word_size` | int | No | BLAST word size，默认 7 |
 ---
 
 
@@ -457,10 +479,17 @@ curl -X GET "http://localhost:8000/api/synteny/search?ID=TraesCS5A02G391700"
 
 **Create Check Job**
 
+**Request Body:** CheckJobRequest (application/json)
+
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-
-**Request Body:** CheckJobRequest (application/json)
+| `app-type` | string | **Yes** | `"check"` |
+| `check-primers` | string | **Yes** | 引物组，每行一个：`PrimerID LeftSeq RightSeq` |
+| `selected-databases` | array | No | 特异性检测数据库列表，默认 `["primer_Chinese_Spring2.1.genome"]` |
+| `size_start` | int | No | 最小扩增子大小 (bp)，默认 50 |
+| `size_stop` | int | No | 最大扩增子大小 (bp)，默认 5000 |
+| `blast_e_value` | int | No | BLAST E-value 阈值，默认 30000 |
+| `blast_identity` | int | No | BLAST 最低相似度 (%)，默认 60 |
 ---
 
 

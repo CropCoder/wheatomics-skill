@@ -26,7 +26,10 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 - `GET /api/genes/functions/pfam?ID=&table=` — PfamSearch: search genes by PFAM domain ID (e.g., `PF00319`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
 - `GET /api/genes/functions/interval?ID=&table=` — IntervalTool: search genes by chromosome interval (e.g., `chr5A:587000000..587200000`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
 - `GET /api/genes/functions/tables` — List available gene function database tables and their descriptions.
+- `GET /api/genes/functions/examples` — List genome example queries (region, gene ID, Pfam ID) for Interval Tool.
 - `GET /api/genes/known/search?searchid=` — Search known/characterized genes with phenotypes and references.
+- `GET /api/genes/known/all` — List all known/characterized genes.
+- `GET /api/genes/known/by-chromosome/{chromosome}` — List known genes on a specific chromosome (e.g., `5A`, `chr5A`).
 - `GET /api/genes/known/{gene_id}` — Get a specific known gene by clone ID or gene ID.
 
 ### Expression
