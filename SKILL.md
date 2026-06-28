@@ -22,7 +22,7 @@ All endpoints return JSON. A `curl` wrapper is provided at `scripts/wheatomics.p
 ## API domains
 
 ### Genes
-- `GET /api/genes/detail/{gene_id}` — Gene detail: description, chromosome, protein length, MW, pI, annotations, JBrowse/Ensembl links. Supports IWGSC v1/v2/v3.
+- `GET /api/genes/detail/{gene_id}` — Gene detail: description, chromosome, protein length, MW, pI, annotations, JBrowse/Ensembl links. 支持 `TraesCS` 格式（01G/02G/03G，如 `TraesCS5A02G391700`、`TraesCS5A02G391700.1`），不支持 `Traes_5AL_*` 旧格式。不支持格式的 ID 先用 `id-conversion` 转换。
 - `GET /api/genes/functions/pfam?ID=&table=` — PfamSearch: search genes by PFAM domain ID (e.g., `PF00319`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
 - `GET /api/genes/functions/interval?ID=&table=` — IntervalTool: search genes by chromosome interval (e.g., `chr5A:587000000..587200000`). Tables: `Genefunc_table` / `Genefunc_IWGSC03G_table`.
 - `GET /api/genes/functions/tables` — List available gene function database tables and their descriptions.
